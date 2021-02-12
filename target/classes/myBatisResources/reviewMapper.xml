@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="reviewMapper">
+
+	<resultMap type="review" id="reviewResult">
+		<id property="reviewId" column="reviewId" />
+		<result property="leaveId" column="leaveId" />
+		<result property="reviewType" column="reviewType" />
+		<result property="remarks" column="remarks" />
+		<result property="dateOfApproval" column="dateOfApproval" />
+		<result property="employeeId" column="employeeId" />
+	</resultMap>
+
+	<insert id="insertReview" parameterType="review"
+		keyProperty="reviewId" useGeneratedKeys="true">
+		INSERT INTO
+		review(leaveId,reviewType,remarks,dateOfApproval,employeeId)
+		VALUES
+		(#{leaveId},#{reviewType},#{remarks},#{dateOfApproval},#{employeeId})
+	</insert>
+
+	<select id="getReviewById" parameterType="int"
+		resultMap="reviewResult">
+		SELECT * FROM review WHERE reviewId=#{reviewId}
+	</select>
+</mapper>

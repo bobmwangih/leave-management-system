@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="employeeMapper">
+
+	<resultMap type="employee" id="employeeResult">
+		<id property="employeeId" column="employeeId" />
+		<result property="firstName" column="firstName" />
+		<result property="lastName" column="lastName" />
+		<result property="email" column="email" />
+		<result property="jobTitle" column="jobTitle" />
+		<result property="station" column="station" />
+		<result property="dateOfJoiningService"
+			column="dateOfJoiningService" />
+		<result property="leaveBalance" column="leaveBalance" />
+		<result property="department" column="department" />
+	</resultMap>
+
+	<select id="getEmployeeById" parameterType="String"
+		resultMap="employeeResult">
+		SELECT * FROM employee WHERE employeeId=#{employeeId}
+	</select>
+	
+	<update id="updateEmployee" parameterType="employee">
+		UPDATE employee SET
+		leaveBalance =
+		#{leaveBalance}
+		WHERE employeeId = #{employeeId}
+	</update>
+</mapper>
