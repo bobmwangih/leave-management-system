@@ -62,7 +62,6 @@
 			<br> <br>
 			<h5>Fill the fields below:</h5>
 			<br>
-			<div class="form-group">
 				<input type="hidden" name="leaveId" value=${leave.leaveId} > 
 				<div class="form-group">
 					<div class="input-group-prepend">
@@ -75,8 +74,6 @@
 						<option value="sick">Sick</option>
 					</select>
 				</div>
-				
-			</div>
 			<div class="form-group">
 				<label for="daysRequested">No of Days: </label> <input type="text"
 					class="form-control" name="daysRequested"

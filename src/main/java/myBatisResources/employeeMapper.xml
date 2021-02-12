@@ -10,12 +10,11 @@
 		<result property="firstName" column="firstName" />
 		<result property="lastName" column="lastName" />
 		<result property="email" column="email" />
-		<result property="jobTitle" column="jobTitle" />
-		<result property="station" column="station" />
+		
 		<result property="dateOfJoiningService"
 			column="dateOfJoiningService" />
 		<result property="leaveBalance" column="leaveBalance" />
-		<result property="department" column="department" />
+		
 	</resultMap>
 
 	<select id="getEmployeeById" parameterType="String"

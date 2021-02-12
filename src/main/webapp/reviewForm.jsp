@@ -96,9 +96,16 @@
 			<br>
 			<h5>Fill below:</h5>
 			<br>
+			
 			<div class="form-group">
-				<label for="reviewType">Review Type: </label> <input type="text"
-					class="form-control" name="reviewType" >
+					<!-- <div class="input-group-prepend">
+						<label class="input-group-text" for="reviewType">Review Type: </label>
+					</div> -->
+					<select class="custom-select" name="reviewType">
+						<option selected>Choose to Approve/Reject...</option>
+						<option value="approved">Approve</option>
+						<option value="declined">Reject</option>
+					</select>
 			</div>
 			<div class="form-group">
 				<label for="remarks">Remarks: </label> <textarea type="text"

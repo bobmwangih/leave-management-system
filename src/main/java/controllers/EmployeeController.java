@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.Objects;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,10 +22,11 @@ public class EmployeeController {
 	@RequestMapping("/ask-to-apply")
 	public ModelAndView askToApply(HttpServletRequest request,HttpServletResponse response) {
 		String employeeId = request.getParameter("employeeId");
-		//System.out.println(employeeId);
+		System.out.println(employeeId);
 		ModelAndView mav = new ModelAndView();
 		Employee employee = employeeDao.getEmployee(employeeId);
-		if(employee != null) {
+		
+		if(!(Objects.isNull(employee))) {
 			mav.setViewName("applicationForm.jsp");
 			mav.addObject("employee", employee);
 			return mav;	
