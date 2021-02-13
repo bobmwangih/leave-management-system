@@ -14,6 +14,7 @@
 		<result property="employeeId" column="employeeId" />
 	</resultMap>
 
+
 	<insert id="insertReview" parameterType="review"
 		keyProperty="reviewId" useGeneratedKeys="true">
 		INSERT INTO
@@ -26,4 +27,5 @@
 		resultMap="reviewResult">
 		SELECT * FROM review WHERE reviewId=#{reviewId}
 	</select>
+	
 </mapper>

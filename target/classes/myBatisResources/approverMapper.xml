@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="approverMapper">
+
+
+	<resultMap type="approver" id="approverResultMap">
+		<id property="employeeId" column="employeeId" />
+		<result property="firstName" column="firstName" />
+		<result property="lastName" column="lastName" />
+		<collection property="reviews" ofType="review">
+			<id property="reviewId" column="reviewId" />
+			<result property="reviewType" column="reviewType" />
+			<result property="remarks" column="remarks" />
+			<result property="dateOfApproval" column="dateOfApproval" />
+		</collection>
+	</resultMap>
+
+	<select id="getApprover" resultMap="approverResultMap">
+		SELECT a.employeeId as
+		employeeId,a.firstName as firstName,a.lastName as lastName,r.reviewId
+		as reviewId,r.reviewType as reviewType,r.remarks as
+		remarks,r.dateOfApproval as dateOfApproval from approver a inner join
+		review r on a.employeeId = r.employeeId
+	</select>
+</mapper>

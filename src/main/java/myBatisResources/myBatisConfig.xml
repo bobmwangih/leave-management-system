@@ -8,6 +8,7 @@
 		<typeAlias type="models.Employee" alias="employee" />
 		<typeAlias type="models.Leave" alias="leave" />
 		<typeAlias type="models.Review" alias="review" />
+		<typeAlias type="models.Approver" alias="approver" />
 	</typeAliases>
 	<environments default="development">
 		<environment id="development">
@@ -25,5 +26,6 @@
 		<mapper resource="myBatisResources/employeeMapper.xml" />
 		<mapper resource="myBatisResources/leaveMapper.xml" />
 		<mapper resource="myBatisResources/reviewMapper.xml" />
+		<mapper resource="myBatisResources/approverMapper.xml" />
 	</mappers>
 </configuration>

@@ -12,7 +12,14 @@ public class Leave {
 	public String dateOfApplication;
 	public String status;
 	public String dateOfApproval;
+	public String approverId;
 	
+	public Leave() {
+		
+	}
+
+
+
 	public Leave(String employeeId, String leaveType, int daysRequested,String startDate,String endDate, String address, String dateOfApplication,
 			String status) {
 		super();
@@ -162,13 +169,28 @@ public class Leave {
 
 
 
+	public String getApproverId() {
+		return approverId;
+	}
+
+
+
+	public void setApproverId(String approverId) {
+		this.approverId = approverId;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "Leave [leaveId=" + leaveId + ", employeeId=" + employeeId + ", leaveType=" + leaveType
 				+ ", daysRequested=" + daysRequested + ", startDate=" + startDate + ", endDate=" + endDate
 				+ ", address=" + address + ", dateOfApplication=" + dateOfApplication + ", status=" + status
-				+ ", dateOfApproval=" + dateOfApproval + "]";
+				+ ", dateOfApproval=" + dateOfApproval + ", approverId=" + approverId + "]";
 	}
+
+
+
 
 	
 }

@@ -9,6 +9,14 @@ public class Review {
 	public String dateOfApproval;
 	public String employeeId;
 	
+	
+	
+	public Review() {
+		
+	}
+
+
+
 	public Review(int leaveId, String reviewType, String remarks, String dateOfApproval, String employeeId) {
 		super();
 		this.leaveId = leaveId;
@@ -29,6 +37,16 @@ public class Review {
 		this.remarks = remarks;
 		this.dateOfApproval = dateOfApproval;
 		this.employeeId = employeeId;
+	}
+
+
+
+	public Review(int reviewId, String reviewType, String remarks, String dateOfApproval) {
+		super();
+		this.reviewId = reviewId;
+		this.reviewType = reviewType;
+		this.remarks = remarks;
+		this.dateOfApproval = dateOfApproval;
 	}
 
 
