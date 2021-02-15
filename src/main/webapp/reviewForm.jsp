@@ -34,115 +34,122 @@
 	<div class="container">
 		<a href="index.jsp"><button type="button" class="btn btn-info">Back</button></a>
 		<br> <br>
-
-		<div class="row">
-			<div class="col-sm-6">
-				<div class="card border-success mb-3" style="max-width: auto;">
-					<form action="review" method="post">
-						<div class="card-header">
-							<h5>Applicants Details:</h5>
-						</div>
-						<div class="card-body text-primary">
-							<div class="form-group">
-								<label for="firstName">Name: </label> <input type="text"
-									class="form-control" name="firstName"
-									value="${employee.firstName} ${employee.lastName}"
-									readOnly="readonly">
-							</div>
-							<div class="form-group">
-								<label for="employeeId">Employee Id: </label> <input type="text"
-									class="form-control" name="employeeId"
-									value="${employee.employeeId}" readOnly="readonly">
-							</div>
-							<div class="form-group">
-								<label for="email">Email: </label> <input type="email"
-									class="form-control" name="email" value="${employee.email}"
-									readOnly="readonly">
-							</div>
-							<div class="form-group">
-								<label for="leaveBalance">Leave Balance</label> <input
-									type="text" class="form-control" name="leaveBalance"
-									value="${employee.leaveBalance}" readOnly="readonly">
-							</div>
-						</div>
-				</div>
+		<div class="card" style="max-width: auto;">
+			<div class="card-header text-primary">
+				<h5>Leave Approval Form</h5>
 			</div>
-			<br>
-			<div class="col-sm-6">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="card border-success mb-3" style="max-width: auto;">
+							<form action="review" method="post">
+								<div class="card-header">
+									<h5>Applicants Details:</h5>
+								</div>
+								<div class="card-body text-primary">
+									<div class="form-group">
+										<label for="firstName">Name: </label> <input type="text"
+											class="form-control" name="firstName"
+											value="${employee.firstName} ${employee.lastName}"
+											readOnly="readonly">
+									</div>
+									<div class="form-group">
+										<label for="employeeId">Employee Id: </label> <input
+											type="text" class="form-control" name="employeeId"
+											value="${employee.employeeId}" readOnly="readonly">
+									</div>
+									<div class="form-group">
+										<label for="email">Email: </label> <input type="email"
+											class="form-control" name="email" value="${employee.email}"
+											readOnly="readonly">
+									</div>
+									<div class="form-group">
+										<label for="leaveBalance">Leave Balance</label> <input
+											type="text" class="form-control" name="leaveBalance"
+											value="${employee.leaveBalance}" readOnly="readonly">
+									</div>
+								</div>
+						</div>
+					</div>
+					<br>
+					<div class="col-sm-6">
+						<div class="card border-success mb-3" style="max-width: auto;">
+							<div class="card-header">
+								<h5>
+									<h5>Leave Details:</h5>
+								</h5>
+							</div>
+							<br> <input type="hidden" name="leaveId"
+								value="${leave.leaveId}" readOnly="readonly">
+							<div class="card-body text-primary">
+								<div class="form-group">
+									<label for="leaveType">Leave Type: </label> <input type="text"
+										class="form-control" name="leaveType"
+										value="${leave.leaveType}" readOnly="readonly">
+								</div>
+								<div class="form-group">
+									<label for="daysRequested">Days requested: </label> <input
+										type="text" class="form-control" name="daysRequested"
+										value="${leave.daysRequested}" readOnly="readonly">
+								</div>
+								<div class="form-group">
+									<label for="startDate">Intended leave Start Date: </label> <input
+										type="text" class="form-control" name="startDate"
+										value="${leave.startDate}" readOnly="readonly">
+								</div>
+								<div class="form-group">
+									<label for="endDate">Intended leave End Date: </label> <input
+										type="text" class="form-control" name=""
+										endDate""
+					value="${leave.endDate}" readOnly="readonly">
+								</div>
+								<div class="form-group">
+									<label for="address">Address while on leave: </label> <input
+										type="text" class="form-control" name="address"
+										value="${leave.address}" readOnly="readonly">
+								</div>
+								<div class="form-group">
+									<label for="dateOfApplication">Date of application: </label> <input
+										type="text" class="form-control" name="dateOfApplication"
+										value="${leave.dateOfApplication}" readOnly="readonly">
+								</div>
+								<div class="form-group">
+									<label for="status">Leave Status: </label> <input type="text"
+										class="form-control" name="status" value="${leave.status}"
+										readOnly="readonly">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<br>
 				<div class="card border-success mb-3" style="max-width: auto;">
 					<div class="card-header">
-						<h5>
-							<h5>Leave Details:</h5>
-						</h5>
+						<h5>Fill Below:</h5>
 					</div>
-					<br> <input type="hidden" name="leaveId"
-						value="${leave.leaveId}" readOnly="readonly">
 					<div class="card-body text-primary">
 						<div class="form-group">
-							<label for="leaveType">Leave Type: </label> <input type="text"
-								class="form-control" name="leaveType" value="${leave.leaveType}"
-								readOnly="readonly">
+							<select class="custom-select" name="reviewType">
+								<option selected>Choose to Approve/Reject...</option>
+								<option value="approved">Approve</option>
+								<option value="declined">Reject</option>
+							</select>
 						</div>
 						<div class="form-group">
-							<label for="daysRequested">Days requested: </label> <input
-								type="text" class="form-control" name="daysRequested"
-								value="${leave.daysRequested}" readOnly="readonly">
+							<label for="remarks">Remarks: </label>
+							<textarea type="text" class="form-control" name="remarks"></textarea>
 						</div>
 						<div class="form-group">
-							<label for="startDate">Intended leave Start Date: </label> <input
-								type="text" class="form-control" name="startDate"
-								value="${leave.startDate}" readOnly="readonly">
+							<label for="supervisorId">Employee Id: </label> <input
+								type="text" class="form-control" name="supervisorId"
+								value="k-Supervisor">
 						</div>
-						<div class="form-group">
-							<label for="endDate">Intended leave End Date: </label> <input
-								type="text" class="form-control" name=""
-								endDate""
-					value="${leave.endDate}" readOnly="readonly">
-						</div>
-						<div class="form-group">
-							<label for="address">Address while on leave: </label> <input
-								type="text" class="form-control" name="address"
-								value="${leave.address}" readOnly="readonly">
-						</div>
-						<div class="form-group">
-							<label for="dateOfApplication">Date of application: </label> <input
-								type="text" class="form-control" name="dateOfApplication"
-								value="${leave.dateOfApplication}" readOnly="readonly">
-						</div>
-						<div class="form-group">
-							<label for="status">Leave Status: </label> <input type="text"
-								class="form-control" name="status" value="${leave.status}"
-								readOnly="readonly">
-						</div>
+						<button type="submit" class="btn btn-outline-success">Review</button>
 					</div>
 				</div>
+				</form>
 			</div>
 		</div>
-		<br>
-		<div class="card border-success mb-3" style="max-width: auto;">
-			<div class="card-header">
-				<h5>Fill Below:</h5>
-			</div>
-			<div class="card-body text-primary">
-				<div class="form-group">
-					<select class="custom-select" name="reviewType">
-						<option selected>Choose to Approve/Reject...</option>
-						<option value="approved">Approve</option>
-						<option value="declined">Reject</option>
-					</select>
-				</div>
-				<div class="form-group">
-					<label for="remarks">Remarks: </label>
-					<textarea type="text" class="form-control" name="remarks"></textarea>
-				</div>
-				<div class="form-group">
-					<label for="supervisorId">Employee Id: </label> <input type="text"
-						class="form-control" name="supervisorId" value="k-Supervisor">
-				</div>
-				<button type="submit" class="btn btn-outline-success">Review</button>
-			</div>
-		</div>
-		</form>
 	</div>
 </body>
 </html>

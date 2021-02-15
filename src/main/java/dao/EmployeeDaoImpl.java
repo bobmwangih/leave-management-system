@@ -2,6 +2,7 @@ package dao;
 
 import org.apache.ibatis.session.SqlSession;
 
+
 import models.Employee;
 import utils.MyBatisConfig;
 
@@ -20,6 +21,14 @@ public class EmployeeDaoImpl implements EmployeeDao{
 		session.update("employeeMapper.updateEmployee", employee);
 		session.commit();
 		session.close();
+	}
+
+	public Employee getEmployeeAndLeaves(String employeeId) {
+		SqlSession session = MyBatisConfig.getSessionFactory().openSession();
+		Employee employee =session.selectOne("employeeMapper.getEmployeeLeaves",employeeId);
+		session.commit();
+		session.close();
+		return employee;
 	}
 
 }

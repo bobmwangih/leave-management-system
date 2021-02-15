@@ -7,7 +7,7 @@
 
 
 	<resultMap type="approver" id="approverResultMap">
-		<id property="employeeId" column="employeeId" />
+		<id property="approverId" column="approverId" />
 		<result property="firstName" column="firstName" />
 		<result property="lastName" column="lastName" />
 		<collection property="reviews" ofType="review">
@@ -19,10 +19,10 @@
 	</resultMap>
 
 	<select id="getApprover" resultMap="approverResultMap">
-		SELECT a.employeeId as
-		employeeId,a.firstName as firstName,a.lastName as lastName,r.reviewId
+		SELECT a.approverId as
+		approverId,a.firstName as firstName,a.lastName as lastName,r.reviewId
 		as reviewId,r.reviewType as reviewType,r.remarks as
 		remarks,r.dateOfApproval as dateOfApproval from approver a inner join
-		review r on a.employeeId = r.employeeId
+		review r on a.approverId = r.approverId
 	</select>
 </mapper>

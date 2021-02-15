@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Log In</title>
+<title>View Application</title>
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -36,69 +36,155 @@
 	<div class="container">
 		<a href="index.jsp"><button type="button" class="btn btn-info">Back</button></a>
 		<br> <br>
-		<div class="card text-center border-success">
-			<div class="card-header text-primary">	<h5>Leaves Applied</h5></div>
-			 <div class="card-body text-success">
-			<table class="table table-striped table-bordered">
-				<thead>
-					<tr>
-						<th scope="col">Employee Id</th>
-						<th scope="col">leave Type</th>
-						<th scope="col">Days Requested</th>
-						<th scope="col">Intended Start Date</th>
-						<th scope="col">Intended end Date</th>
-						<th scope="col">Date of application</th>
-						<th scope="col">Leave status</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${leaves}" var="leave">
+		<div class="card text-center border-danger" style="max-width: auto;">
+			<div class="card-header text-primary">
+				<h5>Leave Pending Approval</h5>
+			</div>
+			<div class="card-body text-success">
+				<table class="table table-striped table-bordered"
+					style="max-width: auto;">
+					<thead>
 						<tr>
-							<td><c:out value="${leave.employeeId}" /></td>
-							<td><c:out value="${leave.leaveType}" /></td>
-							<td><c:out value="${leave.daysRequested}" /></td>
-							<td><c:out value="${leave.startDate}" /></td>
-							<td><c:out value="${leave.endDate}" /></td>
-							<td><c:out value="${leave.dateOfApplication}" /></td>
-							<td><c:out value="${leave.status}" /></td>
+							<th scope="col">Employee Id</th>
+							<th scope="col">leave Type</th>
+							<th scope="col">Days Requested</th>
+							<th scope="col">Intended Start Date</th>
+							<th scope="col">Intended end Date</th>
+							<th scope="col">Date of application</th>
+							<th scope="col">Date of approval</th>
+							<th scope="col">Leave status</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${leaves}" var="leave">
 							<c:set var="status" value="${leave.status}" />
-							<c:choose>
-								<c:when test="${status=='approved'}">
-									<td><a
-										href="download?leaveId=${leave.leaveId}&employeeId=${leave.employeeId}"
-										data-toggle="tooltip"
-										title="Download a pdf version of your approved leave!"><button
-												class="btn btn-outline-success" type="button">Download</button></a></td>
-								</c:when>
+							<c:if test=""></c:if>
+							<tr>
+								<td><c:out value="${leave.employeeId}" /></td>
+								<td><c:out value="${leave.leaveType}" /></td>
+								<td><c:out value="${leave.daysRequested}" /></td>
+								<td><c:out value="${leave.startDate}" /></td>
+								<td><c:out value="${leave.endDate}" /></td>
+								<td><c:out value="${leave.dateOfApplication}" /></td>
+								<td><c:out value="${leave.dateOfApproval}" /></td>
+								<td><c:out value="${leave.status}" /></td>
 
-								<c:when test="${status=='declined'}">
-									<td><a href="#" data-toggle="tooltip"
-										title="The Leave application has been closed,no further action is Allowed!"><button
-												class="btn btn-outline-danger" type="button">Closed</button></a></td>
-								</c:when>
-								<c:otherwise>
-									<td><a
-										href="edit?leaveId=${leave.leaveId}&employeeId=${leave.employeeId}"
-										data-toggle="tooltip" title="Edit your application"><button
-												class="btn btn-outline-primary" type="button">Edit</button></a>
-									</td>
+								<td><a
+									href="edit?leaveId=${leave.leaveId}&employeeId=${leave.employeeId}"
+									data-toggle="tooltip" title="Edit your application">Edit</a>&nbsp;
+
 									<c:url var="deleteLink" value="/delete">
 										<c:param name="leaveId" value="${leave.leaveId}"></c:param>
-									</c:url>
-									<td><a href="${deleteLink}" data-toggle="tooltip"
-										title="Remove your application"><button
-												class="btn btn-outline-danger " type="button"
-												onclick="if(!(confirm('Your Leave application will be deleted,Continue?')))return false;">Delete</button></a>
-									</td>
-								</c:otherwise>
-							</c:choose>
-						</tr>
-					</c:forEach>
+									</c:url> <a href="${deleteLink}" data-toggle="tooltip"
+									title="Remove your application"><button
+											class="btn btn-outline-danger btn-sm " type="button"
+											onclick="if(!(confirm('Your Leave application will be deleted,Continue?')))return false;">Delete</button></a>
+								</td>
 
-				</tbody>
-			</table>
+
+
+							</tr>
+						</c:forEach>
+
+					</tbody>
+				</table>
 			</div>
 		</div>
+		<br> <br>
+		<div class="card text-center border-success" style="max-width: auto;">
+			<div class="card-header text-primary">
+				<h5>Approved/Rejected Leaves</h5>
+			</div>
+			<div class="card-body text-success">
+				<table class="table table-striped table-bordered"
+					style="max-width: auto;">
+					<thead>
+						<tr>
+							<th scope="col">Employee Id</th>
+							<th scope="col">leave Type</th>
+							<th scope="col">Days Requested</th>
+							<th scope="col">Intended Start Date</th>
+							<th scope="col">Intended end Date</th>
+							<th scope="col">Date of application</th>
+							<th scope="col">Date of approval</th>
+							<th scope="col">Leave status</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${leavesWithReview}" var="leaveWithReview">
+							<c:set var="status" value="${leave.status}" />
+							<c:if test=""></c:if>
+							<tr>
+								<td><c:out value="${leaveWithReview.employeeId}" /></td>
+								<td><c:out value="${leaveWithReview.leaveType}" /></td>
+								<td><c:out value="${leaveWithReview.daysRequested}" /></td>
+								<td><c:out value="${leaveWithReview.startDate}" /></td>
+								<td><c:out value="${leaveWithReview.endDate}" /></td>
+								<td><c:out value="${leaveWithReview.dateOfApplication}" /></td>
+								<td><c:out value="${leaveWithReview.dateOfApproval}" /></td>
+								<td><c:out value="${leaveWithReview.status}" /></td>
+								<c:set var="Status" value="${leaveWithReview.status}"></c:set>
+								<c:choose>
+									<c:when test="${Status=='approved'}">
+										<td><a
+											href="download?leaveId=${leaveWithReview.leaveId}&employeeId=${leaveWithReview.employeeId}"
+											data-toggle="tooltip"
+											title="Download a pdf version of your approved leave!"><button
+													class="btn btn-outline-success" type="button">Download</button></a></td>
+									</c:when>
+
+									<c:otherwise>
+										<td>
+
+											<div class="col-md-2">
+												<button type="submit" class="btn btn-outline-danger btn-sm "
+													data-target="#loginAdminModal" data-toggle="modal">Closed(see
+													Remarks)</button>
+
+												<div class="modal fade border-success" tabindex="-1"
+													id="loginAdminModal">
+													<div class="modal-dialog modal-dialog-centered">
+														<div class="modal-content border-success">
+															<div class="modal-header">
+																<h4 class="modal-title text-success">Approver's
+																	Remarks</h4>
+																<button type="button" class="close" data-dismiss="modal"
+																	aria-label="Close">
+																	<span aria-hidden="true">&times;</span>
+																</button>
+															</div>
+															<div class="modal-body">
+																<div class="container">
+																	<div class="form-group">
+																		<c:set var="review" value="${leaveWithReview.review}"></c:set>
+																		<textarea type="text" class="form-control"
+																			name="remarks">${review.remarks}</textarea>
+																	</div>
+
+																</div>
+															</div>
+															<div class="modal-footer">
+																<button type="button" class="btn btn-secondary"
+																	data-dismiss="modal">Close</button>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+
+										</td>
+									</c:otherwise>
+
+								</c:choose>
+
+							</tr>
+						</c:forEach>
+
+					</tbody>
+				</table>
+			</div>
 		</div>
+	</div>
+	</div>
 </body>
 </html>

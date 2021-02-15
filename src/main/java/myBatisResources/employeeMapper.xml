@@ -10,22 +10,65 @@
 		<result property="firstName" column="firstName" />
 		<result property="lastName" column="lastName" />
 		<result property="email" column="email" />
-		
+
 		<result property="dateOfJoiningService"
 			column="dateOfJoiningService" />
 		<result property="leaveBalance" column="leaveBalance" />
-		
+
 	</resultMap>
+
+	<resultMap type="employee" id="employeeLeavesResultMap">
+		<id property="employeeId" column="employeeId" />
+		<result property="firstName" column="firstName" />
+		<result property="lastName" column="lastName" />
+		<result property="email" column="email" />
+		<result property="dateOfJoiningService"
+			column="dateOfJoiningService" />
+		<result property="leaveBalance" column="leaveBalance" />
+		<collection property="leaves" ofType="leave">
+			<id property="leaveId" column="leaveId" />
+			<result property="leaveType" column="leaveType" />
+			<result property="employeeId" column="employeeId" />
+			<result property="daysRequested" column="daysRequested" />
+			<result property="startDate" column="startDate" />
+			<result property="endDate" column="endDate" />
+			<result property="address" column="address" />
+			<result property="dateOfApplication"
+				column="dateOfApplication" />
+			<result property="status" column="status" />
+			<result property="dateOfApproval" column="dateOfApproval" />
+			<result property="approverId" column="approverId" />
+		</collection>
+	</resultMap>
+
 
 	<select id="getEmployeeById" parameterType="String"
 		resultMap="employeeResult">
 		SELECT * FROM employee WHERE employeeId=#{employeeId}
 	</select>
-	
+
 	<update id="updateEmployee" parameterType="employee">
 		UPDATE employee SET
 		leaveBalance =
 		#{leaveBalance}
 		WHERE employeeId = #{employeeId}
 	</update>
+	<select id="getEmployeeLeaves"
+		resultMap="employeeLeavesResultMap" parameterType="String">
+		SELECT e.employeeId as
+		employeeId,e.firstName as
+		firstName,e.lastName as lastName,e.email as
+		email,e.dateOfJoiningService as dateOfJoiningService,e.leaveBalance as
+		leaveBalance,l.leaveId as
+		leaveId,l.employeeId as
+		employeeId,l.leaveType as
+		leaveType,l.daysRequested as daysRequested,l.startDate
+		as
+		startDate,l.endDate as endDate,l.address as
+		address,l.dateOfApplication as dateOfApplication,l.status
+		as status,l.dateOfApproval as
+		dateOfApproval,l.approverId as approverId from
+		employee e inner join
+		leaves l on e.employeeId = l.employeeId where l.employeeId=#{employeeId} 
+	</select>
 </mapper>

@@ -1,6 +1,8 @@
 package dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -8,6 +10,7 @@ import models.Leave;
 import utils.MyBatisConfig;
 
 public class LeaveDaoImpl implements LeaveDao {
+	
 
 	public void saveLeave(Leave leave) {
 		SqlSession session = MyBatisConfig.getSessionFactory().openSession();
@@ -16,9 +19,9 @@ public class LeaveDaoImpl implements LeaveDao {
 		session.close();
 	}
 
-	public List<Leave> getAllLeaves() {
+	public List<Leave> getAllPendingLeaves(String status) {
 		SqlSession session = MyBatisConfig.getSessionFactory().openSession();
-		List<Leave> leaves= session.selectList("leaveMapper.getAllLeaves");
+		List<Leave> leaves= session.selectList("leaveMapper.getAllPendingLeaves",status);
 		session.commit();
 		session.close();
 		return leaves;
@@ -32,9 +35,12 @@ public class LeaveDaoImpl implements LeaveDao {
 		return leave;
 	}
 	
-	public List<Leave> getLeaveByEmployeeId(String employeeId) {
+	public List<Leave> getLeaveByEmployeeIdForEditing(String employeeId,String status) {
+		Map<String,String> details= new HashMap<String, String>();
+		details.put("employeeId", employeeId);
+		details.put("status", status);
 		SqlSession session = MyBatisConfig.getSessionFactory().openSession();
-		List<Leave> leaves = session.selectList("leaveMapper.getLeaveByEmployeeId", employeeId);
+		List<Leave> leaves = session.selectList("leaveMapper.getLeaveByEmployeeId", details);
 		session.commit();
 		session.close();
 		return leaves;
@@ -63,6 +69,27 @@ public class LeaveDaoImpl implements LeaveDao {
 		session.commit();
 		session.close();
 		
+	}
+
+	public List<Leave> getLeaveAndReview(String employeeId) {
+		SqlSession session = MyBatisConfig.getSessionFactory().openSession();
+		List<Leave> leaves = session.selectList("leaveMapper.leaveWithReview", employeeId);
+		session.commit();
+		session.close();
+		return leaves;
+	}
+
+	public Leave getOneLeaveAndReview(String employeeId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public List<Leave> AllLeavesWithReview() {
+		SqlSession session = MyBatisConfig.getSessionFactory().openSession();
+		List<Leave> leaves = session.selectList("leaveMapper.AllLeavesWithReview");
+		session.commit();
+		session.close();
+		return leaves;
 	}
 	
 	

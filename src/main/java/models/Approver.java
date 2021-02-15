@@ -8,7 +8,7 @@ public class Approver extends User{
 
 		public Approver(String employeeId, String firstName, String lastName) {
 			super(employeeId, firstName, lastName);
-			this.reviews = reviews;
+			
 		}
 
 		public List<Review> getReviews() {

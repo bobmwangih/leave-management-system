@@ -1,5 +1,7 @@
 package models;
 
+import java.util.List;
+
 public class Employee extends User {
 
 	private String email;
@@ -8,7 +10,21 @@ public class Employee extends User {
 	private String dateOfJoiningService;
 	private int leaveBalance;
 	//private String department;
+	private List<Leave> leaves;
+
+	public Employee(String employeeId) {
+		super(employeeId);
+		
+	}
+
+
+
+	public Employee() {
 	
+	}
+
+
+
 	public Employee(String employeeId, String firstName, String lastName,String email,String dateOfJoiningService, int leaveBalance) {
 		super(employeeId,firstName,lastName);
 		this.email = email;
@@ -53,6 +69,26 @@ public class Employee extends User {
 
 	public void setLeaveBalance(int leaveBalance) {
 		this.leaveBalance = leaveBalance;
+	}
+
+
+
+	public List<Leave> getLeaves() {
+		return leaves;
+	}
+
+
+
+	public void setLeaves(List<Leave> leaves) {
+		this.leaves = leaves;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "Employee [email=" + email + ", dateOfJoiningService=" + dateOfJoiningService + ", leaveBalance="
+				+ leaveBalance + ", leaves=" + leaves + "]";
 	}
 
 

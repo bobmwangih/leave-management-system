@@ -19,22 +19,69 @@
 
 </head>
 <body>
-	<div class="container">
-		<div class="card text-center border-success ">
-			<div class="card-heade text-primary">
-				<div class="container">
+
+	<div class="card" style="max-width: auto;">
+		<div class="card-header text-primary text-center">
+			<h5>Leave Management System</h5>
+		</div>
+		<div class="card-body">
+			<div class="card text-center border-success ">
+				<div class="card-header text-primary">
+
 					<div class="row justify-content-end">
 
 						<div class="col-md-2">
-							<button type="submit" class="btn btn-outline-primary btn-sm "
-								data-target="#loginModal" data-toggle="modal">Review
-								Application</button>
+							<button type="submit" class="btn btn-outline-danger btn-sm "
+								data-target="#loginAdminModal" data-toggle="modal">Administrator</button>
 
-							<div class="modal fade border-success" tabindex="-1" id="loginModal">
+							<div class="modal fade border-success" tabindex="-1"
+								id="loginAdminModal">
 								<div class="modal-dialog modal-dialog-centered">
 									<div class="modal-content border-success">
 										<div class="modal-header">
-											<h4 class="modal-title text-primary">Approver Login</h4>
+											<h4 class="modal-title text-success">Administrator Login</h4>
+											<button type="button" class="close" data-dismiss="modal"
+												aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body">
+											<div class="container">
+												<form action="#" method="post">
+													<div class="form-group">
+														<label for="userName">UserName: </label> <input
+															type="text" class="form-control" name="userName" value="">
+													</div>
+													<div class="form-group">
+														<label for="password">Password: </label> <input
+															type="text" class="form-control" name="password" value="">
+													</div>
+													<button type="submit" class="btn btn-outline-success">Log
+														in</button>
+												</form>
+
+											</div>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary"
+												data-dismiss="modal">Close</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="col-md-2">
+							<button type="submit" class="btn btn-outline-primary btn-sm "
+								data-target="#loginModal" data-toggle="modal">Approver</button>
+
+							<div class="modal fade border-success" tabindex="-1"
+								id="loginModal">
+								<div class="modal-dialog modal-dialog-centered">
+									<div class="modal-content border-success">
+										<div class="modal-header">
+											<h4 class="modal-title text-success">Approver Login</h4>
 											<button type="button" class="close" data-dismiss="modal"
 												aria-label="Close">
 												<span aria-hidden="true">&times;</span>
@@ -79,7 +126,7 @@
 								<div class="modal-dialog modal-dialog-centered">
 									<div class="modal-content">
 										<div class="modal-header">
-											<h4 class="modal-title">Input your Employee Id</h4>
+											<h4 class="modal-title text-Success">Input your Employee Id</h4>
 											<button type="button" class="close" data-dismiss="modal"
 												aria-label="Close">
 												<span aria-hidden="true">&times;</span>
@@ -108,24 +155,32 @@
 						</div>
 
 					</div>
+
+					<br> <br>
 				</div>
-				<br> <br>
 			</div>
-			<div class="card-body text-success">
-				<form action="ask-to-apply" method="post">
 
-					<div class="form-group">
-						<div>
-							<input type="text" class="form-control" name="employeeId"
-								placeholder="Employee Id" value="t33265896">
-							<button type="submit" class="btn btn-outline-success">Apply</button>
+			<div class="card text-center" style="max-width: auto;">
+				<div class="card-header text-primary text-left">
+					<h6>Ask for leave: </h6>
+				</div>
+				<div class="card-body text-success text-center">
+					<form action="ask-to-apply" method="post">
+
+						<div class="form-group">
+							<div>
+								<input type="text" class="form-control" name="employeeId"
+									placeholder="Employee Id" value="t33265896">
+								<button type="submit" class="btn btn-outline-success">Apply</button>
+							</div>
+
 						</div>
-
-					</div>
-				</form>
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>
+
 
 </body>
 </html>

@@ -11,16 +11,15 @@
 		<result property="reviewType" column="reviewType" />
 		<result property="remarks" column="remarks" />
 		<result property="dateOfApproval" column="dateOfApproval" />
-		<result property="employeeId" column="employeeId" />
 	</resultMap>
 
 
 	<insert id="insertReview" parameterType="review"
 		keyProperty="reviewId" useGeneratedKeys="true">
 		INSERT INTO
-		review(leaveId,reviewType,remarks,dateOfApproval,employeeId)
+		review(leaveId,reviewType,remarks,dateOfApproval)
 		VALUES
-		(#{leaveId},#{reviewType},#{remarks},#{dateOfApproval},#{employeeId})
+		(#{leaveId},#{reviewType},#{remarks},#{dateOfApproval})
 	</insert>
 
 	<select id="getReviewById" parameterType="int"

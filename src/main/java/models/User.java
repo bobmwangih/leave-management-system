@@ -5,6 +5,14 @@ public class User {
 	private String employeeId;
 	private String firstName;
 	private String lastName;
+	
+	
+
+	public User() {
+		
+	}
+
+
 
 	public User(String employeeId, String firstName, String lastName) {
 	

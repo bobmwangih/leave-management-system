@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,9 +27,11 @@ public class LeaveController {
 
 	@Autowired
 	private EmployeeDao employeeDao;
+	
 
 	@RequestMapping("/apply")
 	public ModelAndView apply(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession();
 		String employeeId = request.getParameter("employeeId");
 		String leaveType = request.getParameter("leaveType");
 		int daysRequested = Integer.parseInt(request.getParameter("daysRequested"));
@@ -38,18 +41,23 @@ public class LeaveController {
 		String address = request.getParameter("address");
 		String dateOfApplication = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss").format(LocalDateTime.now());
 		String status = "pending";
+		Leave leave =new Leave(employeeId, leaveType, daysRequested,startDate,endDate, address, dateOfApplication, status);
+		session.setAttribute("leave", leave);
 		ModelAndView mav = new ModelAndView();
+		
 //saving a new leave entry
 
 		if (request.getParameter("leaveId").isEmpty()) {
 			if (leaveBalance > daysRequested || leaveType.equals("sick")) {
-				leaveDao.saveLeave(new Leave(employeeId, leaveType, daysRequested,startDate,endDate, address, dateOfApplication, status));
+				leaveDao.saveLeave(leave);
 				mav.setViewName("index.jsp");
 				System.out.println("leave saved Successfully");
+				session.invalidate();
 				return mav;
 			} else {
 				System.out.println("leave days not sufficient");
 				mav.setViewName("applicationForm.jsp");
+				
 				return mav;
 
 			}
@@ -64,6 +72,7 @@ public class LeaveController {
 				leaveDao.updateEditedLeave(new Leave(leaveId, employeeId, leaveType, daysRequested,startDate,endDate, address, dateOfApplication, status));
 				mav.setViewName("index.jsp");
 				System.out.println("leave updated Successfully");
+				session.invalidate();
 				return mav;
 			} 
 			else 
@@ -79,11 +88,15 @@ public class LeaveController {
 	@RequestMapping("/ask-to-view-application")
 	public ModelAndView viewApplication(HttpServletRequest request, HttpServletResponse response) {
 		String employeeId = request.getParameter("employeeId");
+		String status ="pending";
+		HttpSession session = request.getSession();
 		ModelAndView mav = new ModelAndView();
-		List<Leave> leaves = leaveDao.getLeaveByEmployeeId(employeeId);
-		if (leaves != null) {
+		List<Leave> leaves = leaveDao.getLeaveByEmployeeIdForEditing(employeeId,status);
+		List<Leave> leavesWithReview =leaveDao.getLeaveAndReview(employeeId);
+		if (leaves != null || leavesWithReview!= null) {
 			mav.setViewName("viewApplication.jsp");
 			mav.addObject("leaves", leaves);
+			session.setAttribute("leavesWithReview", leavesWithReview);
 			return mav;
 		} else {
 			mav.setViewName("index.jsp");
@@ -109,7 +122,17 @@ public class LeaveController {
 	public ModelAndView deleteLeave(@RequestParam("leaveId") int leaveId ) {
 		leaveDao.delete(leaveId);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("index.jsp");
+		mav.setViewName("viewApplication.jsp");
+		return mav;
+	}
+	
+	@RequestMapping("/getEmployeeAndLeaves")
+	public ModelAndView getEmployeeAndLeaves(HttpServletRequest request,HttpServletResponse response) {
+		List<Leave> leaves =leaveDao.getLeaveAndReview("t33265896");
+		HttpSession session = request.getSession();
+		session.setAttribute("leaves", leaves);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("viewApplication.jsp");
 		return mav;
 	}
 }

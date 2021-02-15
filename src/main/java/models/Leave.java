@@ -2,17 +2,18 @@ package models;
 
 public class Leave {
 
-	public int leaveId;
-	public String employeeId;
-	public String leaveType;
-	public int daysRequested;
-	public String startDate;
-	public String endDate;
-	public String address;
-	public String dateOfApplication;
-	public String status;
-	public String dateOfApproval;
-	public String approverId;
+	private int leaveId;
+	private String employeeId;
+	private String leaveType;
+	private int daysRequested;
+	private String startDate;
+	private String endDate;
+	private String address;
+	private String dateOfApplication;
+	private String status;
+	private String dateOfApproval;
+	private String approverId;
+	private Review review;
 	
 	public Leave() {
 		
@@ -50,9 +51,8 @@ public class Leave {
 	}
 
 
-
-	public Leave(int leaveId, String employeeId, String leaveType, int daysRequested,String startDate,String endDate, String address,
-			String dateOfApplication, String status, String dateOfApproval) {
+	public Leave(int leaveId, String employeeId, String leaveType, int daysRequested, String startDate, String endDate,
+			String address, String dateOfApplication, String status, String dateOfApproval, String approverId) {
 		super();
 		this.leaveId = leaveId;
 		this.employeeId = employeeId;
@@ -64,18 +64,17 @@ public class Leave {
 		this.dateOfApplication = dateOfApplication;
 		this.status = status;
 		this.dateOfApproval = dateOfApproval;
+		this.approverId = approverId;
 	}
 
 
 
-	
-
-
-	public Leave(int leaveId, String status, String dateOfApproval) {
+	public Leave(int leaveId, String status, String dateOfApproval,String approverId) {
 		super();
 		this.leaveId = leaveId;
 		this.status = status;
 		this.dateOfApproval = dateOfApproval;
+		this.approverId = approverId;
 	}
 
 
@@ -179,6 +178,19 @@ public class Leave {
 		this.approverId = approverId;
 	}
 
+	
+
+
+	public Review getReview() {
+		return review;
+	}
+
+
+
+	public void setReview(Review review) {
+		this.review = review;
+	}
+
 
 
 	@Override
@@ -186,9 +198,8 @@ public class Leave {
 		return "Leave [leaveId=" + leaveId + ", employeeId=" + employeeId + ", leaveType=" + leaveType
 				+ ", daysRequested=" + daysRequested + ", startDate=" + startDate + ", endDate=" + endDate
 				+ ", address=" + address + ", dateOfApplication=" + dateOfApplication + ", status=" + status
-				+ ", dateOfApproval=" + dateOfApproval + ", approverId=" + approverId + "]";
+				+ ", dateOfApproval=" + dateOfApproval + ", approverId=" + approverId + ", review=" + review + "]";
 	}
-
 
 
 

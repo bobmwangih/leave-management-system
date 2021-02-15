@@ -17,12 +17,59 @@
 		<result property="dateOfApplication" column="dateOfApplication" />
 		<result property="status" column="status" />
 		<result property="dateOfApproval" column="dateOfApproval" />
+		<result property="approverId" column="approverId" />
 	</resultMap>
+
+	<resultMap id="leaveWithReview" type="leave">
+		<id property="leaveId" column="leaveId" />
+		<result property="employeeId" column="employeeId" />
+		<result property="leaveType" column="leaveType" />
+		<result property="daysRequested" column="daysRequested" />
+		<result property="startDate" column="startDate" />
+		<result property="endDate" column="endDate" />
+		<result property="address" column="address" />
+		<result property="dateOfApplication" column="dateOfApplication" />
+		<result property="status" column="status" />
+		<result property="dateOfApproval" column="dateOfApproval" />
+		<result property="approverId" column="approverId" />
+		<association property="review" javaType="Review">
+			<id property="reviewId" column="reviewId" />
+			<result property="leaveId" column="leaveId" />
+			<result property="reviewType" column="reviewType" />
+			<result property="remarks" column="remarks" />
+			<result property="dateOfApproval" column="dateOfApproval" />
+		</association>
+	</resultMap>
+	
+	<select id="leaveWithReview" resultMap="leaveWithReview" parameterType="String">
+		SELECT
+		l.leaveId AS leaveId,
+		l.employeeId AS employeeId,
+		l.leaveType AS leaveType,
+		l.daysRequested AS daysRequested,
+		l.startDate AS startDate,
+		l.endDate AS endDate,
+		l.address AS address,
+		l.dateOfApplication AS dateOfApplication,
+		l.status AS status,
+		l.dateOfApproval AS dateOfApproval,
+		l.approverId AS approverId,
+		r.reviewType AS reviewType,
+		r.remarks AS remarks,
+		r.dateOfApproval AS dateOfApproval
+
+		FROM
+		leaves l
+		INNER JOIN
+		review r ON l.leaveId = r.leaveId where l.employeeId= #{employeeId}
+	</select>
+
 
 	<insert id="insertLeave" parameterType="leave"
 		keyProperty="leaveId" useGeneratedKeys="true">
 		INSERT INTO
-		leaves (employeeId,leaveType,daysRequested,startDate,endDate,address,dateOfApplication,status)
+		leaves
+		(employeeId,leaveType,daysRequested,startDate,endDate,address,dateOfApplication,status)
 		VALUES
 		(#{employeeId},#{leaveType},#{daysRequested},#{startDate},#{endDate},#{address},#{dateOfApplication},#{status})
 	</insert>
@@ -31,31 +78,56 @@
 		resultMap="leaveResultMap">
 		SELECT * FROM leaves WHERE leaveId=#{leaveId}
 	</select>
-	
-	<select id="getLeaveByEmployeeId" parameterType="String"
+
+	<select id="getLeaveByEmployeeId" parameterType="java.util.Map"
 		resultMap="leaveResultMap">
-		SELECT * FROM leaves WHERE employeeId=#{employeeId}
+		SELECT * FROM leaves WHERE employeeId=#{employeeId} AND status=#{status}
 	</select>
-	
-	<select id="getAllLeaves" resultMap="leaveResultMap">
-		SELECT * FROM leaves
+
+	<select id="getAllPendingLeaves" resultMap="leaveResultMap">
+		SELECT * FROM leaves WHERE status=#{status}
 	</select>
-	
+
 	<update id="updateLeave" parameterType="leave">
 		UPDATE leaves SET
 		status =
-		#{status},dateOfApproval= #{dateOfApproval}
+		#{status},dateOfApproval= #{dateOfApproval},approverId = #{approverId}
 		WHERE leaveId = #{leaveId}
 	</update>
-	
+
 	<update id="updateEditedLeave" parameterType="leave">
 		UPDATE leaves SET
-		employeeId=#{employeeId},leaveType=#{leaveType},daysRequested=#{daysRequested},startDate=#{startDate},endDate=#{endDate},address=#{address},dateOfApplication=#{dateOfApplication},status =
+		employeeId=#{employeeId},leaveType=#{leaveType},daysRequested=#{daysRequested},startDate=#{startDate},endDate=#{endDate},address=#{address},dateOfApplication=#{dateOfApplication},status
+		=
 		#{status}
 		WHERE leaveId = #{leaveId}
 	</update>
-	
+
 	<delete id="delete" parameterType="int">
-		DELETE FROM leaves WHERE leaveId=#{leaveId}
+		DELETE FROM leaves WHERE
+		leaveId=#{leaveId}
 	</delete>
+	
+		<select id="AllLeavesWithReview" resultMap="leaveWithReview" >
+		SELECT
+		l.leaveId AS leaveId,
+		l.employeeId AS employeeId,
+		l.leaveType AS leaveType,
+		l.daysRequested AS daysRequested,
+		l.startDate AS startDate,
+		l.endDate AS endDate,
+		l.address AS address,
+		l.dateOfApplication AS dateOfApplication,
+		l.status AS status,
+		l.dateOfApproval AS dateOfApproval,
+		l.approverId AS approverId,
+		r.reviewType AS reviewType,
+		r.remarks AS remarks,
+		r.dateOfApproval AS dateOfApproval
+
+		FROM
+		leaves l
+		INNER JOIN
+		review r ON l.leaveId = r.leaveId 
+	</select>
 </mapper>
