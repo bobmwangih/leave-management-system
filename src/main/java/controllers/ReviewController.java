@@ -48,7 +48,8 @@ public class ReviewController {
 			mav.addObject("leavesWithReviews", leavesWithReviews);
 			return mav;
 		} else {
-			mav.setViewName("index.jsp");
+			mav.setViewName("leaveSaved.jsp");
+			mav.addObject("message", "Wrong Credentials,please Log in again with the correct Log in credentials!");
 			return mav;
 		}
 	}
@@ -56,6 +57,7 @@ public class ReviewController {
 	@RequestMapping("/view")
 	public ModelAndView showFormToReview(HttpServletRequest request, HttpServletResponse response) {
 		int leaveId = Integer.parseInt(request.getParameter("leaveId"));
+		System.out.println(leaveId);
 		String employeeId = request.getParameter("employeeId");
 		Employee employee = employeeDao.getEmployee(employeeId);
 		Leave leave = leaveDao.getLeaveById(leaveId);
@@ -79,21 +81,27 @@ public class ReviewController {
 		int daysRequested = Integer.parseInt(request.getParameter("daysRequested"));
 		int leaveBalance = leaveBalanceOriginal - daysRequested;
 		ModelAndView mav = new ModelAndView();
-		
+		System.out.println(leaveId);
 		reviewDao.saveReview(new Review(leaveId, reviewType, remarks, dateOfApproval));
 		System.out.println("Review Saved!");
 
+		//approved
 		if (!(leaveType.equals("sick")) && reviewType.equals("approved")) {
 			leaveDao.updateLeave(new Leave(leaveId,reviewType, dateOfApproval,approverId));
 			employeeDao.updateEmployee(new Employee(employeeId,leaveBalance));
 			System.out.println("date of approval & leave Balance updated!");
-			mav.setViewName("index.jsp");
+			mav.setViewName("leaveSaved.jsp");
+			mav.addObject("message", "Approval sent to the applicant!");
 			return mav;
 			
-		} else {
+		}
+		
+		//rejected
+		else {
 			leaveDao.updateLeave(new Leave(leaveId,reviewType, dateOfApproval,approverId));
 			System.out.println("Date of approval set!");
-			mav.setViewName("index.jsp");
+			mav.setViewName("leaveSaved.jsp");
+			mav.addObject("message", "Declined status sent to the applicant!");
 			return mav;
 		}
 

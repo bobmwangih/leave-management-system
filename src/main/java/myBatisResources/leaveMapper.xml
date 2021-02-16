@@ -64,6 +64,28 @@
 		review r ON l.leaveId = r.leaveId where l.employeeId= #{employeeId}
 	</select>
 
+	<select id="leaveByLeaveIdWithReview" resultMap="leaveWithReview" parameterType="int">
+		SELECT
+		l.leaveId AS leaveId,
+		l.employeeId AS employeeId,
+		l.leaveType AS leaveType,
+		l.daysRequested AS daysRequested,
+		l.startDate AS startDate,
+		l.endDate AS endDate,
+		l.address AS address,
+		l.dateOfApplication AS dateOfApplication,
+		l.status AS status,
+		l.dateOfApproval AS dateOfApproval,
+		l.approverId AS approverId,
+		r.reviewType AS reviewType,
+		r.remarks AS remarks,
+		r.dateOfApproval AS dateOfApproval
+
+		FROM
+		leaves l
+		INNER JOIN
+		review r ON l.leaveId = r.leaveId where l.leaveId= #{leaveId}
+	</select>
 
 	<insert id="insertLeave" parameterType="leave"
 		keyProperty="leaveId" useGeneratedKeys="true">

@@ -14,6 +14,6 @@ public interface LeaveDao {
 	public List<Leave> getLeaveByEmployeeIdForEditing(String employeeId,String status);
 	public void delete(int leaveId);
 	public List<Leave> getLeaveAndReview(String employeeId);
-	public Leave getOneLeaveAndReview(String employeeId);
 	public List<Leave> AllLeavesWithReview();
+	public Leave getLeaveByIdWithReview(int leaveId); 
 }

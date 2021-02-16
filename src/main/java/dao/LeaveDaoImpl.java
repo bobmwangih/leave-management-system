@@ -78,18 +78,20 @@ public class LeaveDaoImpl implements LeaveDao {
 		session.close();
 		return leaves;
 	}
-
-	public Leave getOneLeaveAndReview(String employeeId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public List<Leave> AllLeavesWithReview() {
 		SqlSession session = MyBatisConfig.getSessionFactory().openSession();
 		List<Leave> leaves = session.selectList("leaveMapper.AllLeavesWithReview");
 		session.commit();
 		session.close();
 		return leaves;
+	}
+
+	public Leave getLeaveByIdWithReview(int leaveId) {
+		SqlSession session = MyBatisConfig.getSessionFactory().openSession();
+		Leave leave = session.selectOne("leaveMapper.leaveByLeaveIdWithReview", leaveId);
+		session.commit();
+		session.close();
+		return leave;
 	}
 	
 	

@@ -135,43 +135,13 @@
 
 									<c:otherwise>
 										<td>
-
-											<div class="col-md-2">
-												<button type="submit" class="btn btn-outline-danger btn-sm "
-													data-target="#loginAdminModal" data-toggle="modal">Closed(see
-													Remarks)</button>
-
-												<div class="modal fade border-success" tabindex="-1"
-													id="loginAdminModal">
-													<div class="modal-dialog modal-dialog-centered">
-														<div class="modal-content border-success">
-															<div class="modal-header">
-																<h4 class="modal-title text-success">Approver's
-																	Remarks</h4>
-																<button type="button" class="close" data-dismiss="modal"
-																	aria-label="Close">
-																	<span aria-hidden="true">&times;</span>
-																</button>
-															</div>
-															<div class="modal-body">
-																<div class="container">
-																	<div class="form-group">
-																		<c:set var="review" value="${leaveWithReview.review}"></c:set>
-																		<textarea type="text" class="form-control"
-																			name="remarks">${review.remarks}</textarea>
-																	</div>
-
-																</div>
-															</div>
-															<div class="modal-footer">
-																<button type="button" class="btn btn-secondary"
-																	data-dismiss="modal">Close</button>
-															</div>
+										<div class="col-md-2">
+												<a href="seeRemarks?leaveId=${leaveWithReview.leaveId}"
+													data-toggle="tooltip"
+													title="View Approver's remarks of your approved leave!"><button
+														class="btn btn-outline-warning" type="button">Closed(see
+														Remarks)</button></a>
 														</div>
-													</div>
-												</div>
-											</div>
-
 										</td>
 									</c:otherwise>
 

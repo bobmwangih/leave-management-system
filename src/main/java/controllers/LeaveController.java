@@ -33,6 +33,9 @@ public class LeaveController {
 	public ModelAndView apply(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
 		String employeeId = request.getParameter("employeeId");
+		String firstName = request.getParameter("firstName");
+		String lastName = request.getParameter("lastName");
+		String email = request.getParameter("email");
 		String leaveType = request.getParameter("leaveType");
 		int daysRequested = Integer.parseInt(request.getParameter("daysRequested"));
 		String startDate = request.getParameter("startDate");
@@ -41,8 +44,10 @@ public class LeaveController {
 		String address = request.getParameter("address");
 		String dateOfApplication = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss").format(LocalDateTime.now());
 		String status = "pending";
+		Employee employee= new Employee(employeeId,firstName,lastName,email,leaveBalance);
 		Leave leave =new Leave(employeeId, leaveType, daysRequested,startDate,endDate, address, dateOfApplication, status);
-		session.setAttribute("leave", leave);
+		//session.setAttribute("leave", leave);
+		session.setAttribute("employee", employee);
 		ModelAndView mav = new ModelAndView();
 		
 //saving a new leave entry
@@ -50,14 +55,16 @@ public class LeaveController {
 		if (request.getParameter("leaveId").isEmpty()) {
 			if (leaveBalance > daysRequested || leaveType.equals("sick")) {
 				leaveDao.saveLeave(leave);
-				mav.setViewName("index.jsp");
+				mav.setViewName("leaveSaved.jsp");
+				mav.addObject("message", "leave saved Successfully");
 				System.out.println("leave saved Successfully");
 				session.invalidate();
 				return mav;
 			} else {
 				System.out.println("leave days not sufficient");
-				mav.setViewName("applicationForm.jsp");
-				
+				mav.setViewName("leaveSaved.jsp");
+				mav.addObject("message", "leave days not sufficient,Leave not saved");
+		
 				return mav;
 
 			}
@@ -70,7 +77,8 @@ public class LeaveController {
 			{
 				int leaveId = Integer.parseInt(request.getParameter("leaveId"));
 				leaveDao.updateEditedLeave(new Leave(leaveId, employeeId, leaveType, daysRequested,startDate,endDate, address, dateOfApplication, status));
-				mav.setViewName("index.jsp");
+				mav.setViewName("leaveSaved.jsp");
+				mav.addObject("message", "leave updated Successfully");
 				System.out.println("leave updated Successfully");
 				session.invalidate();
 				return mav;
@@ -78,7 +86,8 @@ public class LeaveController {
 			else 
 			{
 				System.out.println("leave days not sufficient");
-				mav.setViewName("index.jsp");
+				mav.setViewName("leaveSaved.jsp");
+				mav.addObject("message", "leave days not sufficient,Leave not saved");
 				return mav;
 			}
 		}
@@ -122,7 +131,8 @@ public class LeaveController {
 	public ModelAndView deleteLeave(@RequestParam("leaveId") int leaveId ) {
 		leaveDao.delete(leaveId);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("viewApplication.jsp");
+		mav.setViewName("leaveSaved.jsp");
+		mav.addObject("message", "leave deleted successfully!");
 		return mav;
 	}
 	
@@ -133,6 +143,16 @@ public class LeaveController {
 		session.setAttribute("leaves", leaves);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("viewApplication.jsp");
+		return mav;
+	}
+	
+	@RequestMapping("/seeRemarks")
+	public ModelAndView getLeaveByIdWithRemarks(@RequestParam("leaveId") int leaveId) {
+		Leave leave = leaveDao.getLeaveByIdWithReview(leaveId);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("remarks.jsp");
+		mav.addObject("message", leave.getReview().remarks);
 		return mav;
 	}
 }

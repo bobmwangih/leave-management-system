@@ -16,7 +16,6 @@ public class Review {
 
 
 	public Review(int reviewId, int leaveId, String reviewType, String remarks, String dateOfApproval) {
-		super();
 		this.reviewId = reviewId;
 		this.leaveId = leaveId;
 		this.reviewType = reviewType;
@@ -26,13 +25,19 @@ public class Review {
 
 
 
-	public Review(int reviewId, String reviewType, String remarks, String dateOfApproval) {
+	public Review(int leaveId, String reviewType, String remarks, String dateOfApproval) {
 		super();
-		this.reviewId = reviewId;
+		this.leaveId = leaveId;
 		this.reviewType = reviewType;
 		this.remarks = remarks;
 		this.dateOfApproval = dateOfApproval;
 	}
+
+	/*
+	 * public Review(int reviewId, String reviewType, String remarks, String
+	 * dateOfApproval) { super(); this.reviewId = reviewId; this.reviewType =
+	 * reviewType; this.remarks = remarks; this.dateOfApproval = dateOfApproval; }
+	 */
 
 
 
