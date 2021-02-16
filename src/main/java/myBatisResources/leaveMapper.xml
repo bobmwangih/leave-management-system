@@ -41,6 +41,31 @@
 		</association>
 	</resultMap>
 	
+	<resultMap id="leavesWithReview" type="leave">
+		<result property="employeeId" column="employeeId" />
+		<result property="leaveType" column="leaveType" />
+		<result property="daysRequested" column="daysRequested" />
+		
+		<association property="review" javaType="Review">
+			
+			<result property="reviewType" column="reviewType" />
+			
+		</association>
+	</resultMap>
+	<select id="leavezWithReview" resultMap="leavesWithReview">
+		SELECT
+		
+		l.employeeId AS employeeId,
+		l.leaveType AS leaveType,
+		l.daysRequested AS daysRequested,
+		r.reviewType AS reviewType
+		
+		FROM
+		leaves l
+		INNER JOIN
+		review r ON l.leaveId = r.leaveId
+	</select>
+	
 	<select id="leaveWithReview" resultMap="leaveWithReview" parameterType="String">
 		SELECT
 		l.leaveId AS leaveId,

@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="approvedLeave" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c59b8434-8a55-4351-8d3d-ff3dbaabaa60">
+	<field name="leaveType" class="java.lang.String">
+		<fieldDescription><![CDATA[leaveType]]></fieldDescription>
+	</field>
+	<field name="daysRequested" class="java.lang.Integer">
+		<fieldDescription><![CDATA[daysRequested]]></fieldDescription>
+	</field>
+	<field name="startDate" class="java.lang.String">
+		<fieldDescription><![CDATA[startDate]]></fieldDescription>
+	</field>
+	<field name="endDate" class="java.lang.String">
+		<fieldDescription><![CDATA[endDate]]></fieldDescription>
+	</field>
+	<field name="address" class="java.lang.String">
+		<fieldDescription><![CDATA[address]]></fieldDescription>
+	</field>
+	<field name="dateOfApplication" class="java.lang.String">
+		<fieldDescription><![CDATA[dateOfApplication]]></fieldDescription>
+	</field>
+	<field name="status" class="java.lang.String">
+		<fieldDescription><![CDATA[status]]></fieldDescription>
+	</field>
+	<field name="dateOfApproval" class="java.lang.String">
+		<fieldDescription><![CDATA[dateOfApproval]]></fieldDescription>
+	</field>
+	<field name="reviewType" class="java.lang.String">
+		<fieldDescription><![CDATA[review.reviewType]]></fieldDescription>
+	</field>
+	<field name="remarks" class="java.lang.String">
+		<fieldDescription><![CDATA[review.remarks]]></fieldDescription>
+	</field>
+	<field name="employeeId" class="java.lang.String">
+		<fieldDescription><![CDATA[employeeId]]></fieldDescription>
+	</field>
+	<field name="employeeFirstName" class="java.lang.String">
+		<fieldDescription><![CDATA[employee.firstName]]></fieldDescription>
+	</field>
+	<field name="employeeLastName" class="java.lang.String">
+		<fieldDescription><![CDATA[employee.lastName]]></fieldDescription>
+	</field>
+	<field name="email" class="java.lang.String">
+		<fieldDescription><![CDATA[employee.email]]></fieldDescription>
+	</field>
+	<field name="dateOfJoiningService" class="java.lang.String">
+		<fieldDescription><![CDATA[employee.dateOfJoiningService]]></fieldDescription>
+	</field>
+	<field name="leaveBalance" class="java.lang.Integer">
+		<fieldDescription><![CDATA[employee.leaveBalance]]></fieldDescription>
+	</field>
+	<field name="approverId" class="java.lang.String">
+		<fieldDescription><![CDATA[approverId]]></fieldDescription>
+	</field>
+	<field name="approverFirstName" class="java.lang.String">
+		<fieldDescription><![CDATA[approver.firstName]]></fieldDescription>
+	</field>
+	<field name="approverLastName" class="java.lang.String">
+		<fieldDescription><![CDATA[approver.lastName]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="59" splitType="Stretch">
+			<frame>
+				<reportElement x="210" y="0" width="190" height="40" uuid="b860560a-0dfe-4e5d-a920-55b44e7c9a05"/>
+				<staticText>
+					<reportElement x="0" y="0" width="190" height="40" uuid="57829657-6806-4750-8235-d4b506f55f6d"/>
+					<text><![CDATA[Approved Leave Application]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="20" splitType="Stretch">
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="360" y="0" width="100" height="20" uuid="b63b4ce3-45ce-43af-a873-573c168419ce"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Agency FB"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH:mm">
+				<reportElement x="460" y="0" width="100" height="20" uuid="30aa84e0-a1d3-4d27-af9e-aba4b6418848"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Agency FB"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="-1" width="100" height="21" uuid="e16b9b21-d488-4044-8d81-419cca1bd2ac"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Agency FB"/>
+				</textElement>
+				<text><![CDATA[KRA]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="382" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="550" height="130" uuid="dd983dce-5eae-456b-a1f2-e03bec219a58"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="20" width="100" height="30" uuid="2cb30e1a-e9b8-48b5-8978-af794ba5b03d"/>
+				<text><![CDATA[Name:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="120" y="20" width="100" height="30" uuid="3ab36cb5-9668-479b-adf2-a54ffb1073e4"/>
+				<textFieldExpression><![CDATA[$F{employeeFirstName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="255" y="20" width="100" height="30" uuid="ebbc3b1c-825e-4202-8835-3f10523b8d5d"/>
+				<textFieldExpression><![CDATA[$F{employeeLastName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="60" width="100" height="30" uuid="021ccd22-a5bf-4bb9-a3a4-e7b65a7463e0"/>
+				<text><![CDATA[Employee Id:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="120" y="60" width="100" height="30" uuid="e92c2340-8ee4-45f5-a4e3-286570373296"/>
+				<textFieldExpression><![CDATA[$F{employeeId}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="100" width="100" height="30" uuid="44813ce3-42a1-4306-8748-b0b2ae9659b4"/>
+				<text><![CDATA[Email:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="120" y="100" width="100" height="30" uuid="f9f3682e-799f-4b97-a93b-81ea3b325a45"/>
+				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="260" y="60" width="100" height="30" uuid="a118c5fb-1223-4919-a12e-6adfce25530f"/>
+				<text><![CDATA[Date of Employment:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="400" y="60" width="100" height="30" uuid="b3e713cd-76e3-479b-a5e3-0bd166026f5e"/>
+				<textFieldExpression><![CDATA[$F{dateOfJoiningService}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="260" y="100" width="100" height="30" uuid="4575fe07-e7b0-4ec0-a379-23b606337ee1"/>
+				<text><![CDATA[Leave Balance: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="400" y="100" width="100" height="30" uuid="3c722cdd-78f5-4af0-af59-d915dd2fc00d"/>
+				<textFieldExpression><![CDATA[$F{leaveBalance}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="-1" y="130" width="551" height="240" uuid="0debe3c4-f1fd-4acc-8d3e-48602b89e7a1"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="248" height="13" uuid="8e734993-2e9f-45ef-a40a-964bc3a6178b"/>
+				<text><![CDATA[Employee Details]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="130" width="248" height="20" uuid="8682dc8b-27d7-44e8-be1d-1d413c7fd09a"/>
+				<text><![CDATA[Leave Details]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="-1" y="300" width="551" height="82" uuid="363a00fd-895f-42c9-8117-8e9761cb9023"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="302" width="140" height="20" uuid="ca306413-8279-4430-b408-bd8779e2c8d0"/>
+				<text><![CDATA[Approver Recomendations]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="160" width="100" height="30" uuid="0a6b1b0a-27c1-46ee-8f9c-a383168fe708"/>
+				<text><![CDATA[Type of Leave Requested:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="120" y="160" width="100" height="30" uuid="942e1897-bbd7-4589-a36b-d24544c54ab6"/>
+				<textFieldExpression><![CDATA[$F{leaveType}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="200" width="100" height="30" uuid="e069ad29-8108-4288-8422-e7b8fc1b8f25"/>
+				<text><![CDATA[No of Days Requested:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="130" y="200" width="100" height="30" uuid="a85b8c9d-3ca2-49b2-94b2-6d264edc8829"/>
+				<textFieldExpression><![CDATA[$F{daysRequested}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="240" y="200" width="40" height="30" uuid="0956cfa8-beb3-41df-b288-7f4216d4768a"/>
+				<text><![CDATA[Starting:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="290" y="200" width="70" height="30" uuid="120a2faf-c4d4-455a-8cb6-e2e4a9245b7c"/>
+				<textFieldExpression><![CDATA[$F{startDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="390" y="200" width="50" height="30" uuid="45469e23-89b2-4665-b60e-8ff735987a83"/>
+				<text><![CDATA[Ending:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="460" y="200" width="70" height="30" uuid="7190790b-ab57-4130-bb53-1c3bfdd6c02a"/>
+				<textFieldExpression><![CDATA[$F{endDate}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="260" y="160" width="100" height="30" uuid="a772fe8c-2d92-41ac-8eb3-9296c8f34cbd"/>
+				<text><![CDATA[Date of Application:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="400" y="160" width="100" height="30" uuid="4072ad30-e61d-44e1-aa8b-687569e36775"/>
+				<textFieldExpression><![CDATA[$F{dateOfApplication}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="59" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="30" width="100" height="24" uuid="485ca681-bc3a-4e03-aec2-cb7149e0c728"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[Leave Report]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="470" y="30" width="100" height="29" uuid="4b501923-1a2d-470f-a6cd-5913ad27650d"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

@@ -93,6 +93,15 @@ public class LeaveDaoImpl implements LeaveDao {
 		session.close();
 		return leave;
 	}
+
+	public List<Leave> leavezWithReview() {
+		SqlSession session = MyBatisConfig.getSessionFactory().openSession();
+		List<Leave> leaves = session.selectList("leaveMapper.leavezWithReview");
+		session.commit();
+		session.close();
+		return leaves;
+		
+	}
 	
 	
 

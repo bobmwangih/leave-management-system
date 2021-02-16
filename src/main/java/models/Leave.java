@@ -77,8 +77,7 @@ public class Leave {
 		this.approverId = approverId;
 	}
 
-
-
+	
 	public int getLeaveId() {
 		return leaveId;
 	}

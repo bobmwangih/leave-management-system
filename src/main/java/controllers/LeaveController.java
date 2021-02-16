@@ -1,8 +1,13 @@
 package controllers;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,6 +23,13 @@ import dao.EmployeeDao;
 import dao.LeaveDao;
 import models.Employee;
 import models.Leave;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 @Controller
 public class LeaveController {
@@ -28,6 +40,7 @@ public class LeaveController {
 	@Autowired
 	private EmployeeDao employeeDao;
 	
+	private Calendar calender=Calendar.getInstance();
 
 	@RequestMapping("/apply")
 	public ModelAndView apply(HttpServletRequest request, HttpServletResponse response) {
@@ -154,5 +167,34 @@ public class LeaveController {
 		mav.setViewName("remarks.jsp");
 		mav.addObject("message", leave.getReview().remarks);
 		return mav;
+	}
+	
+	@RequestMapping("download")
+	public void downloadPdf(HttpServletRequest request, HttpServletResponse response) throws IOException, JRException {
+		List<Leave> leaves = leaveDao.leavezWithReview();
+	
+		
+		final InputStream stream = this.getClass().getResourceAsStream("/testReport.jrxml");
+		
+		 // Compile the Jasper report from .jrxml to .japser
+        final JasperReport report = JasperCompileManager.compileReport(stream);
+        
+     // Fetching the leaves from the data source.
+        final JRBeanCollectionDataSource source = new JRBeanCollectionDataSource(leaves);
+        
+        // Adding the additional parameters to the pdf.
+        final Map<String, Object> parameters =null;
+        
+     // Filling the report with the employee data and additional parameters information.
+        final JasperPrint print = JasperFillManager.fillReport(report, parameters, source);
+        
+        Integer month=calender.get(Calendar.MONTH);
+        response.setContentType("application/x-download");
+        response.addHeader("Content-disposition", "attachment; filename="+"leave_report"+calender.get(Calendar.DATE)+"-"+String.valueOf(month+1)+"-"+calender.get(Calendar.YEAR)+".pdf");
+        OutputStream out = response.getOutputStream();
+        JasperExportManager.exportReportToPdfStream(print, out);
+        out.flush();
+        out.close();
+        
 	}
 }
