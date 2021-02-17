@@ -129,7 +129,7 @@
 										<td>
 										<%-- href="download?leaveId=${leaveWithReview.leaveId}&employeeId=${leaveWithReview.employeeId}" --%>
 										<a
-										href="download"
+										href="download-approved-leave?leaveId=${leaveWithReview.leaveId}"
 											data-toggle="tooltip"
 											title="Download a pdf version of your approved leave!"><button
 													class="btn btn-outline-success" type="button">Download</button></a></td>

@@ -40,39 +40,104 @@
 			<result property="dateOfApproval" column="dateOfApproval" />
 		</association>
 	</resultMap>
-	
+
 	<resultMap id="leavesWithReview" type="leave">
 		<result property="employeeId" column="employeeId" />
 		<result property="leaveType" column="leaveType" />
 		<result property="daysRequested" column="daysRequested" />
-		
+
 		<association property="review" javaType="Review">
-			
+
 			<result property="reviewType" column="reviewType" />
-			
+
 		</association>
 	</resultMap>
-	<select id="leavezWithReview" resultMap="leavesWithReview">
+
+	<resultMap id="leaveWithReviewAndActors" type="leave">
+		<result property="employeeId" column="employeeId" />
+		<result property="leaveType" column="leaveType" />
+		<result property="daysRequested" column="daysRequested" />
+		<result property="startDate" column="startDate" />
+		<result property="endDate" column="endDate" />
+		<result property="address" column="address" />
+		<result property="dateOfApplication" column="dateOfApplication" />
+		<result property="dateOfApproval" column="dateOfApproval" />
+		<result property="approverId" column="approverId" />
+		<association property="review" javaType="Review">
+			<result property="reviewType" column="reviewType" />
+			<result property="remarks" column="remarks" />
+		</association>
+		<association property="employee" javaType="Employee">
+			<result property="firstName" column="firstName" />
+			<result property="lastName" column="lastName" />
+			<result property="email" column="email" />
+			<result property="dateOfJoiningService"
+				column="dateOfJoiningService" />
+			<result property="leaveBalance" column="leaveBalance" />
+		</association>
+		<association property="approver" javaType="Approver">
+			<result property="firstName" column="firstName" />
+			<result property="lastName" column="lastName" />
+		</association>
+	</resultMap>
+
+	<select id="leaveWithReviewAndItsActors"
+		resultMap="leaveWithReviewAndActors" parameterType="int">
 		SELECT
-		
 		l.employeeId AS employeeId,
 		l.leaveType AS leaveType,
 		l.daysRequested AS daysRequested,
+		l.startDate AS startDate,
+		l.endDate AS endDate,
+		l.address AS address,
+		l.dateOfApplication AS dateOfApplication,
+		l.dateOfApproval AS dateOfApproval,
+		l.approverId AS approverId,
+		r.reviewType AS reviewType,
+		r.remarks AS remarks,
+		e.firstName AS firstName,
+		e.lastName AS lastName,
+		e.email AS email,
+		e.dateOfJoiningService AS dateOfJoiningService,
+		e.leaveBalance AS leaveBalance,
+		a.firstName as firstName,
+		a.lastName as lastName
+
+		FROM
+		leaves l
+		INNER JOIN
+		review r ON l.leaveId = r.leaveId
+		INNER JOIN
+		employee e ON l.employeeId = e.employeeId
+		INNER JOIN
+		approver a ON l.approverId = a.approverId
+		WHERE l.leaveId =34
+	</select>
+
+	<select id="leavezWithReview" resultMap="leavesWithReview">
+		SELECT
+
+		l.employeeId AS employeeId,
+		l.leaveType AS leaveType,
+		l.daysRequested AS
+		daysRequested,
 		r.reviewType AS reviewType
-		
+
 		FROM
 		leaves l
 		INNER JOIN
 		review r ON l.leaveId = r.leaveId
 	</select>
-	
-	<select id="leaveWithReview" resultMap="leaveWithReview" parameterType="String">
+
+	<select id="leaveWithReview" resultMap="leaveWithReview"
+		parameterType="String">
 		SELECT
 		l.leaveId AS leaveId,
 		l.employeeId AS employeeId,
 		l.leaveType AS leaveType,
 		l.daysRequested AS daysRequested,
-		l.startDate AS startDate,
+		l.startDate
+		AS startDate,
 		l.endDate AS endDate,
 		l.address AS address,
 		l.dateOfApplication AS dateOfApplication,
@@ -81,35 +146,43 @@
 		l.approverId AS approverId,
 		r.reviewType AS reviewType,
 		r.remarks AS remarks,
-		r.dateOfApproval AS dateOfApproval
+		r.dateOfApproval AS
+		dateOfApproval
 
 		FROM
 		leaves l
 		INNER JOIN
-		review r ON l.leaveId = r.leaveId where l.employeeId= #{employeeId}
+		review r ON l.leaveId = r.leaveId
+		where l.employeeId= #{employeeId}
 	</select>
 
-	<select id="leaveByLeaveIdWithReview" resultMap="leaveWithReview" parameterType="int">
+	<select id="leaveByLeaveIdWithReview"
+		resultMap="leaveWithReview" parameterType="int">
 		SELECT
 		l.leaveId AS leaveId,
 		l.employeeId AS employeeId,
 		l.leaveType AS leaveType,
-		l.daysRequested AS daysRequested,
+		l.daysRequested AS
+		daysRequested,
 		l.startDate AS startDate,
 		l.endDate AS endDate,
-		l.address AS address,
+		l.address
+		AS address,
 		l.dateOfApplication AS dateOfApplication,
-		l.status AS status,
+		l.status AS
+		status,
 		l.dateOfApproval AS dateOfApproval,
 		l.approverId AS approverId,
 		r.reviewType AS reviewType,
 		r.remarks AS remarks,
-		r.dateOfApproval AS dateOfApproval
+		r.dateOfApproval AS
+		dateOfApproval
 
 		FROM
 		leaves l
 		INNER JOIN
-		review r ON l.leaveId = r.leaveId where l.leaveId= #{leaveId}
+		review r ON l.leaveId = r.leaveId
+		where l.leaveId= #{leaveId}
 	</select>
 
 	<insert id="insertLeave" parameterType="leave"
@@ -128,11 +201,13 @@
 
 	<select id="getLeaveByEmployeeId" parameterType="java.util.Map"
 		resultMap="leaveResultMap">
-		SELECT * FROM leaves WHERE employeeId=#{employeeId} AND status=#{status}
+		SELECT * FROM leaves WHERE employeeId=#{employeeId} AND
+		status=#{status}
 	</select>
 
 	<select id="getAllPendingLeaves" resultMap="leaveResultMap">
-		SELECT * FROM leaves WHERE status=#{status}
+		SELECT * FROM leaves
+		WHERE status=#{status}
 	</select>
 
 	<update id="updateLeave" parameterType="leave">
@@ -154,19 +229,22 @@
 		DELETE FROM leaves WHERE
 		leaveId=#{leaveId}
 	</delete>
-	
-		<select id="AllLeavesWithReview" resultMap="leaveWithReview" >
+
+	<select id="AllLeavesWithReview" resultMap="leaveWithReview">
 		SELECT
 		l.leaveId AS leaveId,
 		l.employeeId AS employeeId,
-		l.leaveType AS leaveType,
+		l.leaveType AS
+		leaveType,
 		l.daysRequested AS daysRequested,
 		l.startDate AS startDate,
 		l.endDate AS endDate,
 		l.address AS address,
-		l.dateOfApplication AS dateOfApplication,
+		l.dateOfApplication AS
+		dateOfApplication,
 		l.status AS status,
-		l.dateOfApproval AS dateOfApproval,
+		l.dateOfApproval AS
+		dateOfApproval,
 		l.approverId AS approverId,
 		r.reviewType AS reviewType,
 		r.remarks AS remarks,
@@ -175,6 +253,6 @@
 		FROM
 		leaves l
 		INNER JOIN
-		review r ON l.leaveId = r.leaveId 
+		review r ON l.leaveId = r.leaveId
 	</select>
 </mapper>

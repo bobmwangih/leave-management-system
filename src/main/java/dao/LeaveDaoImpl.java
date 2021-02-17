@@ -102,6 +102,14 @@ public class LeaveDaoImpl implements LeaveDao {
 		return leaves;
 		
 	}
+
+	public Leave leaveWithReviewAndItsActors(int leaveId) {
+		SqlSession session = MyBatisConfig.getSessionFactory().openSession();
+		Leave leave = session.selectOne("leaveMapper.leaveWithReviewAndItsActors", leaveId);
+		session.commit();
+		session.close();
+		return leave;
+	}
 	
 	
 

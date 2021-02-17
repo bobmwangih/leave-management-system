@@ -19,9 +19,6 @@
 	<field name="dateOfApplication" class="java.lang.String">
 		<fieldDescription><![CDATA[dateOfApplication]]></fieldDescription>
 	</field>
-	<field name="status" class="java.lang.String">
-		<fieldDescription><![CDATA[status]]></fieldDescription>
-	</field>
 	<field name="dateOfApproval" class="java.lang.String">
 		<fieldDescription><![CDATA[dateOfApproval]]></fieldDescription>
 	</field>
@@ -98,7 +95,7 @@
 		</band>
 	</pageHeader>
 	<detail>
-		<band height="382" splitType="Stretch">
+		<band height="581" splitType="Stretch">
 			<rectangle>
 				<reportElement x="0" y="0" width="550" height="130" uuid="dd983dce-5eae-456b-a1f2-e03bec219a58"/>
 			</rectangle>
@@ -147,76 +144,128 @@
 				<textFieldExpression><![CDATA[$F{leaveBalance}]]></textFieldExpression>
 			</textField>
 			<rectangle>
-				<reportElement x="-1" y="130" width="551" height="240" uuid="0debe3c4-f1fd-4acc-8d3e-48602b89e7a1"/>
+				<reportElement x="-1" y="140" width="551" height="150" uuid="0debe3c4-f1fd-4acc-8d3e-48602b89e7a1"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="0" y="0" width="248" height="13" uuid="8e734993-2e9f-45ef-a40a-964bc3a6178b"/>
+				<reportElement x="0" y="0" width="140" height="13" uuid="8e734993-2e9f-45ef-a40a-964bc3a6178b"/>
 				<text><![CDATA[Employee Details]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="130" width="248" height="20" uuid="8682dc8b-27d7-44e8-be1d-1d413c7fd09a"/>
+				<reportElement x="0" y="140" width="140" height="20" uuid="8682dc8b-27d7-44e8-be1d-1d413c7fd09a"/>
 				<text><![CDATA[Leave Details]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement x="-1" y="300" width="551" height="82" uuid="363a00fd-895f-42c9-8117-8e9761cb9023"/>
+				<reportElement x="-1" y="301" width="551" height="249" uuid="363a00fd-895f-42c9-8117-8e9761cb9023"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="0" y="302" width="140" height="20" uuid="ca306413-8279-4430-b408-bd8779e2c8d0"/>
+				<reportElement x="0" y="301" width="140" height="20" uuid="ca306413-8279-4430-b408-bd8779e2c8d0"/>
 				<text><![CDATA[Approver Recomendations]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="160" width="100" height="30" uuid="0a6b1b0a-27c1-46ee-8f9c-a383168fe708"/>
+				<reportElement x="0" y="180" width="100" height="30" uuid="0a6b1b0a-27c1-46ee-8f9c-a383168fe708"/>
 				<text><![CDATA[Type of Leave Requested:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="120" y="160" width="100" height="30" uuid="942e1897-bbd7-4589-a36b-d24544c54ab6"/>
+				<reportElement x="120" y="180" width="100" height="30" uuid="942e1897-bbd7-4589-a36b-d24544c54ab6"/>
 				<textFieldExpression><![CDATA[$F{leaveType}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="200" width="100" height="30" uuid="e069ad29-8108-4288-8422-e7b8fc1b8f25"/>
+				<reportElement x="0" y="220" width="100" height="30" uuid="e069ad29-8108-4288-8422-e7b8fc1b8f25"/>
 				<text><![CDATA[No of Days Requested:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="130" y="200" width="100" height="30" uuid="a85b8c9d-3ca2-49b2-94b2-6d264edc8829"/>
+				<reportElement x="120" y="220" width="100" height="30" uuid="a85b8c9d-3ca2-49b2-94b2-6d264edc8829"/>
 				<textFieldExpression><![CDATA[$F{daysRequested}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="240" y="200" width="40" height="30" uuid="0956cfa8-beb3-41df-b288-7f4216d4768a"/>
+				<reportElement x="240" y="220" width="40" height="30" uuid="0956cfa8-beb3-41df-b288-7f4216d4768a"/>
 				<text><![CDATA[Starting:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="290" y="200" width="70" height="30" uuid="120a2faf-c4d4-455a-8cb6-e2e4a9245b7c"/>
+				<reportElement x="285" y="220" width="70" height="30" uuid="120a2faf-c4d4-455a-8cb6-e2e4a9245b7c"/>
 				<textFieldExpression><![CDATA[$F{startDate}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="390" y="200" width="50" height="30" uuid="45469e23-89b2-4665-b60e-8ff735987a83"/>
+				<reportElement x="380" y="220" width="50" height="30" uuid="45469e23-89b2-4665-b60e-8ff735987a83"/>
 				<text><![CDATA[Ending:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="460" y="200" width="70" height="30" uuid="7190790b-ab57-4130-bb53-1c3bfdd6c02a"/>
+				<reportElement x="440" y="220" width="70" height="30" uuid="7190790b-ab57-4130-bb53-1c3bfdd6c02a"/>
 				<textFieldExpression><![CDATA[$F{endDate}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="260" y="160" width="100" height="30" uuid="a772fe8c-2d92-41ac-8eb3-9296c8f34cbd"/>
+				<reportElement x="240" y="180" width="100" height="30" uuid="a772fe8c-2d92-41ac-8eb3-9296c8f34cbd"/>
 				<text><![CDATA[Date of Application:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="400" y="160" width="100" height="30" uuid="4072ad30-e61d-44e1-aa8b-687569e36775"/>
+				<reportElement x="350" y="180" width="100" height="30" uuid="4072ad30-e61d-44e1-aa8b-687569e36775"/>
 				<textFieldExpression><![CDATA[$F{dateOfApplication}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="260" width="100" height="30" uuid="3113600d-8025-48d3-bffc-05828013f3c2"/>
+				<text><![CDATA[Address while on leave]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="120" y="260" width="100" height="30" uuid="9ccfb7f4-6f3c-417c-9556-5e010331750e"/>
+				<textFieldExpression><![CDATA[$F{address}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="330" width="100" height="30" uuid="7a622db4-831c-4b31-8d30-eabdad0bf313"/>
+				<text><![CDATA[Recommendations]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="130" y="330" width="100" height="30" uuid="b698e90e-4818-4284-9f5a-c5a8b4d21275"/>
+				<textFieldExpression><![CDATA[$F{reviewType}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="370" width="100" height="30" uuid="36c13517-d95b-4fbc-a122-02c91ae8e6a8"/>
+				<text><![CDATA[Remarks:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="130" y="370" width="100" height="30" uuid="4c38e305-9145-4c0b-9ba5-e86cd95e4578"/>
+				<textFieldExpression><![CDATA[$F{remarks}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="450" width="100" height="30" uuid="d5c0740b-93e0-49fb-b149-078dc9ba5690"/>
+				<text><![CDATA[Approver]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="130" y="450" width="100" height="30" uuid="86a86d0d-de10-49ab-9a33-675b96bed5df"/>
+				<textFieldExpression><![CDATA[$F{approverFirstName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="250" y="450" width="100" height="30" uuid="b564e991-59f3-4ae9-9175-45930123f95c"/>
+				<textFieldExpression><![CDATA[$F{approverLastName}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="500" width="100" height="30" uuid="7a3ad50e-95d8-4c8a-9d0d-99f93fd2c6ce"/>
+				<text><![CDATA[Approver's Id]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="130" y="500" width="100" height="30" uuid="7db01849-be09-4780-9cb1-0480381c3b2f"/>
+				<textFieldExpression><![CDATA[$F{approverId}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="410" width="100" height="30" uuid="6778a9a6-4af0-4e6f-9633-48cff67fb29f"/>
+				<text><![CDATA[Date of Approval]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="130" y="410" width="100" height="30" uuid="97dfae7a-9999-4834-81d1-13415eaaac0d"/>
+				<textFieldExpression><![CDATA[$F{dateOfApproval}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="59" splitType="Stretch">
+		<band height="75" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="30" width="100" height="24" uuid="485ca681-bc3a-4e03-aec2-cb7149e0c728"/>
+				<reportElement x="0" y="51" width="100" height="24" uuid="485ca681-bc3a-4e03-aec2-cb7149e0c728"/>
 				<textElement textAlignment="Left" verticalAlignment="Bottom">
 					<font fontName="SansSerif"/>
 				</textElement>
 				<text><![CDATA[Leave Report]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="470" y="30" width="100" height="29" uuid="4b501923-1a2d-470f-a6cd-5913ad27650d"/>
+				<reportElement x="470" y="40" width="100" height="29" uuid="4b501923-1a2d-470f-a6cd-5913ad27650d"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
 				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>

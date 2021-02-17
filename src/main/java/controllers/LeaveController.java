@@ -169,32 +169,4 @@ public class LeaveController {
 		return mav;
 	}
 	
-	@RequestMapping("download")
-	public void downloadPdf(HttpServletRequest request, HttpServletResponse response) throws IOException, JRException {
-		List<Leave> leaves = leaveDao.leavezWithReview();
-	
-		
-		final InputStream stream = this.getClass().getResourceAsStream("/testReport.jrxml");
-		
-		 // Compile the Jasper report from .jrxml to .japser
-        final JasperReport report = JasperCompileManager.compileReport(stream);
-        
-     // Fetching the leaves from the data source.
-        final JRBeanCollectionDataSource source = new JRBeanCollectionDataSource(leaves);
-        
-        // Adding the additional parameters to the pdf.
-        final Map<String, Object> parameters =null;
-        
-     // Filling the report with the employee data and additional parameters information.
-        final JasperPrint print = JasperFillManager.fillReport(report, parameters, source);
-        
-        Integer month=calender.get(Calendar.MONTH);
-        response.setContentType("application/x-download");
-        response.addHeader("Content-disposition", "attachment; filename="+"leave_report"+calender.get(Calendar.DATE)+"-"+String.valueOf(month+1)+"-"+calender.get(Calendar.YEAR)+".pdf");
-        OutputStream out = response.getOutputStream();
-        JasperExportManager.exportReportToPdfStream(print, out);
-        out.flush();
-        out.close();
-        
-	}
 }

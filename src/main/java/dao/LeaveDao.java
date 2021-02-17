@@ -17,4 +17,5 @@ public interface LeaveDao {
 	public List<Leave> AllLeavesWithReview();
 	public Leave getLeaveByIdWithReview(int leaveId); 
 	public List<Leave> leavezWithReview();
+	public Leave leaveWithReviewAndItsActors(int leaveId); 
 }

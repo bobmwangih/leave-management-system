@@ -14,6 +14,8 @@ public class Leave {
 	private String dateOfApproval;
 	private String approverId;
 	private Review review;
+	private Employee employee;
+	private Approver approver;
 	
 	public Leave() {
 		
@@ -192,16 +194,40 @@ public class Leave {
 
 
 
+	public Employee getEmployee() {
+		return employee;
+	}
+
+
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
+
+
+	public Approver getApprover() {
+		return approver;
+	}
+
+
+
+	public void setApprover(Approver approver) {
+		this.approver = approver;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "Leave [leaveId=" + leaveId + ", employeeId=" + employeeId + ", leaveType=" + leaveType
 				+ ", daysRequested=" + daysRequested + ", startDate=" + startDate + ", endDate=" + endDate
 				+ ", address=" + address + ", dateOfApplication=" + dateOfApplication + ", status=" + status
-				+ ", dateOfApproval=" + dateOfApproval + ", approverId=" + approverId + ", review=" + review + "]";
+				+ ", dateOfApproval=" + dateOfApproval + ", approverId=" + approverId + ", review=" + review
+				+ ", employee=" + employee + ", approver=" + approver + "]";
 	}
 
-
-
+	
 	
 }
 
