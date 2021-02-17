@@ -41,18 +41,6 @@
 		</association>
 	</resultMap>
 
-	<resultMap id="leavesWithReview" type="leave">
-		<result property="employeeId" column="employeeId" />
-		<result property="leaveType" column="leaveType" />
-		<result property="daysRequested" column="daysRequested" />
-
-		<association property="review" javaType="Review">
-
-			<result property="reviewType" column="reviewType" />
-
-		</association>
-	</resultMap>
-
 	<resultMap id="leaveWithReviewAndActors" type="leave">
 		<result property="employeeId" column="employeeId" />
 		<result property="leaveType" column="leaveType" />
@@ -76,8 +64,8 @@
 			<result property="leaveBalance" column="leaveBalance" />
 		</association>
 		<association property="approver" javaType="Approver">
-			<result property="firstName" column="firstName" />
-			<result property="lastName" column="lastName" />
+			<result property="firstName" column="approverFirstName" />
+			<result property="lastName" column="approverLastName" />
 		</association>
 	</resultMap>
 
@@ -100,8 +88,8 @@
 		e.email AS email,
 		e.dateOfJoiningService AS dateOfJoiningService,
 		e.leaveBalance AS leaveBalance,
-		a.firstName as firstName,
-		a.lastName as lastName
+		a.firstName as approverFirstName,
+		a.lastName as approverLastName
 
 		FROM
 		leaves l
@@ -111,23 +99,10 @@
 		employee e ON l.employeeId = e.employeeId
 		INNER JOIN
 		approver a ON l.approverId = a.approverId
-		WHERE l.leaveId =34
+		WHERE l.leaveId = #{leaveId}
 	</select>
 
-	<select id="leavezWithReview" resultMap="leavesWithReview">
-		SELECT
 
-		l.employeeId AS employeeId,
-		l.leaveType AS leaveType,
-		l.daysRequested AS
-		daysRequested,
-		r.reviewType AS reviewType
-
-		FROM
-		leaves l
-		INNER JOIN
-		review r ON l.leaveId = r.leaveId
-	</select>
 
 	<select id="leaveWithReview" resultMap="leaveWithReview"
 		parameterType="String">

@@ -41,7 +41,7 @@
 				<h5>Leave Pending Approval</h5>
 			</div>
 			<div class="card-body text-success">
-				<table class="table table-striped table-bordered"
+				<table class="table table-striped table-bordered table-hover"
 					style="max-width: auto;">
 					<thead>
 						<tr>
@@ -100,6 +100,7 @@
 					style="max-width: auto;">
 					<thead>
 						<tr>
+						<th scope="col">leave Id</th>
 							<th scope="col">Employee Id</th>
 							<th scope="col">leave Type</th>
 							<th scope="col">Days Requested</th>
@@ -115,6 +116,7 @@
 							<c:set var="status" value="${leave.status}" />
 							<c:if test=""></c:if>
 							<tr>
+							<td><c:out value="${leaveWithReview.leaveId}" /></td>
 								<td><c:out value="${leaveWithReview.employeeId}" /></td>
 								<td><c:out value="${leaveWithReview.leaveType}" /></td>
 								<td><c:out value="${leaveWithReview.daysRequested}" /></td>
@@ -127,9 +129,11 @@
 								<c:choose>
 									<c:when test="${Status=='approved'}">
 										<td>
-										<%-- href="download?leaveId=${leaveWithReview.leaveId}&employeeId=${leaveWithReview.employeeId}" --%>
+										<c:url var="downloadLink" value="/download">
+										<c:param name="leaveId" value="${leaveWithReview.leaveId}"></c:param>
+									</c:url>
 										<a
-										href="download-approved-leave?leaveId=${leaveWithReview.leaveId}"
+										href="${downloadLink}"
 											data-toggle="tooltip"
 											title="Download a pdf version of your approved leave!"><button
 													class="btn btn-outline-success" type="button">Download</button></a></td>

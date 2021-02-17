@@ -6,6 +6,12 @@ public class Approver extends User{
 
 		private List<Review> reviews;
 
+		
+		
+		public Approver() {
+			
+		}
+
 		public Approver(String employeeId, String firstName, String lastName) {
 			super(employeeId, firstName, lastName);
 			

@@ -42,10 +42,17 @@ public class Employee extends User {
 	}
 
 
+//
+//	public Employee(String email, int leaveBalance) {
+//		super();
+//		this.email = email;
+//		this.leaveBalance = leaveBalance;
+//	}
 
-	public Employee(String email, int leaveBalance) {
-		super();
-		this.email = email;
+
+
+	public Employee(String employeeId,int leaveBalance) {
+		super(employeeId);
 		this.leaveBalance = leaveBalance;
 	}
 

@@ -32,39 +32,41 @@ public class ReviewController {
 	@Autowired
 	private EmployeeDao employeeDao;
 
+//Authenticate the approver ,then show all the leaves	
 	@RequestMapping("/ask-to-review")
 	public ModelAndView authenticateApprover(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
-		HttpSession session;
 		String userName = request.getParameter("userName");
 		String password = request.getParameter("password");
 		String status = "pending";
-		List<Leave> leavesWithReviews =leaveDao.AllLeavesWithReview();
-		
-
+//if the Approver is authenticated,populate the jsp with:leaves pending approval & leaves that have been approved+their reviews(readOnly)
 		if (userName.equals("patrick") && password.equals("patrick123")) {
+			List<Leave> leavesWithReviews = leaveDao.AllLeavesWithReview();
+			List<Leave> leaves = leaveDao.getAllPendingLeaves(status);
 			mav.setViewName("leavesList.jsp");
-			mav.addObject("leaves", leaveDao.getAllPendingLeaves(status));
+			mav.addObject("leaves", leaves);
 			mav.addObject("leavesWithReviews", leavesWithReviews);
 			return mav;
-		} else {
+		}
+//invalid login credentials		
+		else {
 			mav.setViewName("leaveSaved.jsp");
 			mav.addObject("message", "Wrong Credentials,please Log in again with the correct Log in credentials!");
 			return mav;
 		}
 	}
 
+//Handler to bring a reviewform View,loaded with the applicant's details and their respective leave data
 	@RequestMapping("/view")
 	public ModelAndView showFormToReview(HttpServletRequest request, HttpServletResponse response) {
 		int leaveId = Integer.parseInt(request.getParameter("leaveId"));
-		System.out.println(leaveId);
 		String employeeId = request.getParameter("employeeId");
 		Employee employee = employeeDao.getEmployee(employeeId);
 		Leave leave = leaveDao.getLeaveById(leaveId);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("reviewForm.jsp");
-		mav.addObject("employee", employee);
 		mav.addObject("leave", leave);
+		mav.addObject("employee", employee);
 		return mav;
 	}
 
@@ -77,36 +79,35 @@ public class ReviewController {
 		String employeeId = request.getParameter("employeeId");
 		String approverId = request.getParameter("supervisorId");
 		int leaveBalanceOriginal = Integer.parseInt(request.getParameter("leaveBalance"));
-		String leaveType =request.getParameter("leaveType");
+		String leaveType = request.getParameter("leaveType");
 		int daysRequested = Integer.parseInt(request.getParameter("daysRequested"));
 		int leaveBalance = leaveBalanceOriginal - daysRequested;
 		ModelAndView mav = new ModelAndView();
-		System.out.println(leaveId);
 		reviewDao.saveReview(new Review(leaveId, reviewType, remarks, dateOfApproval));
+		Employee employee =new Employee(employeeId, leaveBalance);
+		System.out.println(employee);
 		System.out.println("Review Saved!");
 
-		//approved
+// approved leave
 		if (!(leaveType.equals("sick")) && reviewType.equals("approved")) {
-			leaveDao.updateLeave(new Leave(leaveId,reviewType, dateOfApproval,approverId));
-			employeeDao.updateEmployee(new Employee(employeeId,leaveBalance));
+			leaveDao.updateLeave(new Leave(leaveId, reviewType, dateOfApproval, approverId));
+			employeeDao.updateEmployee(employee);
+			System.out.println(leaveBalance);
 			System.out.println("date of approval & leave Balance updated!");
 			mav.setViewName("leaveSaved.jsp");
 			mav.addObject("message", "Approval sent to the applicant!");
 			return mav;
-			
+
 		}
-		
-		//rejected
+
+// rejected leave
 		else {
-			leaveDao.updateLeave(new Leave(leaveId,reviewType, dateOfApproval,approverId));
+			leaveDao.updateLeave(new Leave(leaveId, reviewType, dateOfApproval, approverId));
 			System.out.println("Date of approval set!");
 			mav.setViewName("leaveSaved.jsp");
 			mav.addObject("message", "Declined status sent to the applicant!");
 			return mav;
 		}
 
-		
-
-		
 	}
 }

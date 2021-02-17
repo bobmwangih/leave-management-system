@@ -25,10 +25,10 @@
 					<div class="modal-content border-success">
 						<div class="modal-header">
 							<h4 class="modal-title text-success">Approver's Remarks</h4>
-							<button type="button" class="close" data-dismiss="modal"
+						<!-- 	<button type="button" class="close" data-dismiss="modal"
 								aria-label="Close">
 								<span aria-hidden="true">&times;</span>
-							</button>
+							</button> -->
 						</div>
 						<div class="modal-body text-success">
 							<div class="container">
@@ -36,8 +36,8 @@
 									<textarea type="text" class="form-control" > ${message} </textarea>
 								</div>
 							</div>
-							<a href="index.jsp"><button type="button"
-									class="btn btn-info">Home</button></a>
+							<a href="viewApplication.jsp"><button type="button"
+									class="btn btn-info">Back</button></a>
 						</div>
 					</div>
 				</div>

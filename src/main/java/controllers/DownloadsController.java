@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import dao.LeaveDao;
 import models.Leave;
@@ -34,31 +35,30 @@ public class DownloadsController {
 	private Calendar calender=Calendar.getInstance();
 	
 //Downloading approved Leave application	
-	@RequestMapping("download-approved-leave")
-	public void downloadApprovedLeavePdf(HttpServletRequest request, HttpServletResponse response) throws IOException, JRException {
-		int leaveId = Integer.parseInt(request.getParameter("leaveId"));
-		
-		//getting the values to be included in the report from the database
+	@RequestMapping("download")
+	public void downloadApprovedLeavePdf(@RequestParam("leaveId") int leaveId,HttpServletRequest request, HttpServletResponse response) throws IOException, JRException {
+		System.out.println(leaveId);
+//getting the values to be included in the report from the database
 		Leave leave = leaveDao.leaveWithReviewAndItsActors(leaveId);
 		System.out.println(leave);
 		
-		//converting the result to a  List in order for it to be passed to the JR datasource
+//converting the result to a  List in order for it to be passed to the JR datasource
 		 List<Leave> leaves = new ArrayList<Leave>(); 
 	        leaves.add(leave); 
 	        
-		//Reading the Jasper report xml file
+//Reading the Jasper report xml file
 		final InputStream stream = this.getClass().getResourceAsStream("/approvedLeave.jrxml");
 		
-		 // Compile the Jasper report from .jrxml to .japser
+// Compile the Jasper report from .jrxml to .japser
         final JasperReport report = JasperCompileManager.compileReport(stream);
         
-     // Fetching the leave from the data source.
+// Fetching the leave from the data source.
         final JRBeanCollectionDataSource source = new JRBeanCollectionDataSource(leaves);
         
-        // Adding the additional parameters to the pdf.
+// Adding the additional parameters to the pdf.
         final Map<String, Object> parameters =null;
         
-     // Filling the report with the employee data and additional parameters information.
+// Filling the report with the employee data and additional parameters information.
         final JasperPrint print = JasperFillManager.fillReport(report, parameters, source);
         
         Integer month=calender.get(Calendar.MONTH);

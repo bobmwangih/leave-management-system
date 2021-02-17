@@ -1,13 +1,8 @@
 package controllers;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,13 +18,6 @@ import dao.EmployeeDao;
 import dao.LeaveDao;
 import models.Employee;
 import models.Leave;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 @Controller
 public class LeaveController {
@@ -40,8 +28,7 @@ public class LeaveController {
 	@Autowired
 	private EmployeeDao employeeDao;
 	
-	private Calendar calender=Calendar.getInstance();
-
+//Handler to save a new leave application/an edited leave application
 	@RequestMapping("/apply")
 	public ModelAndView apply(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
@@ -57,12 +44,13 @@ public class LeaveController {
 		String address = request.getParameter("address");
 		String dateOfApplication = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss").format(LocalDateTime.now());
 		String status = "pending";
-		Employee employee= new Employee(employeeId,firstName,lastName,email,leaveBalance);
-		Leave leave =new Leave(employeeId, leaveType, daysRequested,startDate,endDate, address, dateOfApplication, status);
-		//session.setAttribute("leave", leave);
+		Employee employee = new Employee(employeeId, firstName, lastName, email, leaveBalance);
+		Leave leave = new Leave(employeeId, leaveType, daysRequested, startDate, endDate, address, dateOfApplication,
+				status);
+		
 		session.setAttribute("employee", employee);
 		ModelAndView mav = new ModelAndView();
-		
+
 //saving a new leave entry
 
 		if (request.getParameter("leaveId").isEmpty()) {
@@ -73,11 +61,15 @@ public class LeaveController {
 				System.out.println("leave saved Successfully");
 				session.invalidate();
 				return mav;
-			} else {
+			} 
+//Insufficient leave days,display the error drop the application			
+			else {
+				
 				System.out.println("leave days not sufficient");
 				mav.setViewName("leaveSaved.jsp");
-				mav.addObject("message", "leave days not sufficient,Leave not saved");
-		
+				mav.addObject("origin", "insufficientDays");
+				mav.addObject("message", "Invalid leave days Requested,Leave application will not Saved!");
+
 				return mav;
 
 			}
@@ -86,52 +78,58 @@ public class LeaveController {
 //updating an existing leave entry		
 
 		else {
-			if (leaveBalance > daysRequested || leaveType.equals("sick"))
-			{
+			if (leaveBalance > daysRequested || leaveType.equals("sick")) {
 				int leaveId = Integer.parseInt(request.getParameter("leaveId"));
-				leaveDao.updateEditedLeave(new Leave(leaveId, employeeId, leaveType, daysRequested,startDate,endDate, address, dateOfApplication, status));
+				leaveDao.updateEditedLeave(new Leave(leaveId, employeeId, leaveType, daysRequested, startDate, endDate,
+						address, dateOfApplication, status));
 				mav.setViewName("leaveSaved.jsp");
 				mav.addObject("message", "leave updated Successfully");
 				System.out.println("leave updated Successfully");
 				session.invalidate();
 				return mav;
-			} 
-			else 
-			{
+			}
+//insufficient days,drop the application			
+			else {
 				System.out.println("leave days not sufficient");
 				mav.setViewName("leaveSaved.jsp");
-				mav.addObject("message", "leave days not sufficient,Leave not saved");
+				mav.addObject("origin", "insufficientDays");
+				mav.addObject("message", "Invalid leave days Requested,Leave application will not Updated!");
 				return mav;
 			}
 		}
 
 	}
+	
+//handler to view a saved leave	
 
 	@RequestMapping("/ask-to-view-application")
 	public ModelAndView viewApplication(HttpServletRequest request, HttpServletResponse response) {
 		String employeeId = request.getParameter("employeeId");
-		String status ="pending";
+		String status = "pending";
 		HttpSession session = request.getSession();
 		ModelAndView mav = new ModelAndView();
-		List<Leave> leaves = leaveDao.getLeaveByEmployeeIdForEditing(employeeId,status);
-		List<Leave> leavesWithReview =leaveDao.getLeaveAndReview(employeeId);
-		if (leaves != null || leavesWithReview!= null) {
+		List<Leave> leaves = leaveDao.getLeaveByEmployeeIdForEditing(employeeId, status);
+		List<Leave> leavesWithReview = leaveDao.getLeaveAndReview(employeeId);
+		if (!(leaves.isEmpty()) || !(leavesWithReview.isEmpty())) {
 			mav.setViewName("viewApplication.jsp");
 			mav.addObject("leaves", leaves);
 			session.setAttribute("leavesWithReview", leavesWithReview);
+			session.setAttribute("leaves", leaves);
 			return mav;
 		} else {
-			mav.setViewName("index.jsp");
-			mav.addObject("employeeId", employeeId);
+			mav.setViewName("leaveSaved.jsp");
+			mav.addObject("message", "This employee doesnt have any leave records in our system");
 			return mav;
 		}
 	}
 
+//handler to reload application form for the actor to edit leave details	
 	@RequestMapping("/edit")
 	public ModelAndView editApplication(HttpServletRequest request, HttpServletResponse response) {
 		int leaveId = Integer.parseInt(request.getParameter("leaveId"));
 		String employeeId = request.getParameter("employeeId");
 		Employee employee = employeeDao.getEmployee(employeeId);
+		request.getSession().setAttribute("employee", employee);
 		Leave leave = leaveDao.getLeaveById(leaveId);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("applicationForm.jsp");
@@ -139,26 +137,19 @@ public class LeaveController {
 		mav.addObject("leave", leave);
 		return mav;
 	}
-	
+
+// handler to delete a leave record from the database
 	@RequestMapping("/delete")
-	public ModelAndView deleteLeave(@RequestParam("leaveId") int leaveId ) {
+	public ModelAndView deleteLeave(@RequestParam("leaveId") int leaveId) {
 		leaveDao.delete(leaveId);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("leaveSaved.jsp");
+		mav.addObject("origin","delete");
 		mav.addObject("message", "leave deleted successfully!");
 		return mav;
 	}
 	
-	@RequestMapping("/getEmployeeAndLeaves")
-	public ModelAndView getEmployeeAndLeaves(HttpServletRequest request,HttpServletResponse response) {
-		List<Leave> leaves =leaveDao.getLeaveAndReview("t33265896");
-		HttpSession session = request.getSession();
-		session.setAttribute("leaves", leaves);
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("viewApplication.jsp");
-		return mav;
-	}
-	
+//handler to view Leave remarks of a declined application
 	@RequestMapping("/seeRemarks")
 	public ModelAndView getLeaveByIdWithRemarks(@RequestParam("leaveId") int leaveId) {
 		Leave leave = leaveDao.getLeaveByIdWithReview(leaveId);
@@ -168,5 +159,4 @@ public class LeaveController {
 		mav.addObject("message", leave.getReview().remarks);
 		return mav;
 	}
-	
 }

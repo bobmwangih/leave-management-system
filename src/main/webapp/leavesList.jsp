@@ -33,7 +33,7 @@
 				<h5>Leaves Pending approval</h5>
 			</div>
 			<div class="card-body text-success">
-				<table class="table table-striped table-bordered">
+				<table class="table table-striped table-bordered table-hover">
 					<thead>
 						<tr>
 							<th scope="col">Employee Id</th>

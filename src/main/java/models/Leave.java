@@ -223,8 +223,8 @@ public class Leave {
 		return "Leave [leaveId=" + leaveId + ", employeeId=" + employeeId + ", leaveType=" + leaveType
 				+ ", daysRequested=" + daysRequested + ", startDate=" + startDate + ", endDate=" + endDate
 				+ ", address=" + address + ", dateOfApplication=" + dateOfApplication + ", status=" + status
-				+ ", dateOfApproval=" + dateOfApproval + ", approverId=" + approverId + ", review=" + review
-				+ ", employee=" + employee + ", approver=" + approver + "]";
+				+ ", dateOfApproval=" + dateOfApproval + ", approverId=" + approverId + ", review=" + getReview()
+				+ ", employee=" + getEmployee() + ", approver=" + getApprover() + "]";
 	}
 
 	

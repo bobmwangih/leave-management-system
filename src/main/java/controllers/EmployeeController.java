@@ -19,6 +19,7 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeDao employeeDao;
 	
+//entry handler mapping for an actor: Applicant	
 	@RequestMapping("/ask-to-apply")
 	public ModelAndView askToApply(HttpServletRequest request,HttpServletResponse response) {
 		String employeeId = request.getParameter("employeeId");
@@ -26,11 +27,14 @@ public class EmployeeController {
 		ModelAndView mav = new ModelAndView();
 		Employee employee = employeeDao.getEmployee(employeeId);
 		
+//if the employee Id inputed is valid
 		if(!(Objects.isNull(employee))) {
 			mav.setViewName("applicationForm.jsp");
 			mav.addObject("employee", employee);
 			return mav;	
 		}
+		
+//Employee Id does not exist
 		else {
 			mav.setViewName("index.jsp");
 			mav.addObject("employeeId", employeeId);

@@ -40,10 +40,6 @@
 									<div class="modal-content border-success">
 										<div class="modal-header">
 											<h4 class="modal-title text-success">Administrator Login</h4>
-											<button type="button" class="close" data-dismiss="modal"
-												aria-label="Close">
-												<span aria-hidden="true">&times;</span>
-											</button>
 										</div>
 										<div class="modal-body">
 											<div class="container">
@@ -82,10 +78,6 @@
 									<div class="modal-content border-success">
 										<div class="modal-header">
 											<h4 class="modal-title text-success">Approver Login</h4>
-											<button type="button" class="close" data-dismiss="modal"
-												aria-label="Close">
-												<span aria-hidden="true">&times;</span>
-											</button>
 										</div>
 										<div class="modal-body">
 											<div class="container">
@@ -126,11 +118,7 @@
 								<div class="modal-dialog modal-dialog-centered">
 									<div class="modal-content">
 										<div class="modal-header">
-											<h4 class="modal-title text-Success">Input your Employee Id</h4>
-											<button type="button" class="close" data-dismiss="modal"
-												aria-label="Close">
-												<span aria-hidden="true">&times;</span>
-											</button>
+											<h4 class="modal-title text-Success">Employee Id:</h4>
 										</div>
 										<div class="modal-body">
 											<form action="ask-to-view-application" method="post">

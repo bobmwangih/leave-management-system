@@ -32,7 +32,7 @@
 </head>
 <body>
 	<div class="container">
-		<a href="index.jsp"><button type="button" class="btn btn-info">Back</button></a>
+		<a href="viewApplication.jsp"><button type="button" class="btn btn-info">Back</button></a>
 		<br> <br>
 		<div class="card" style="max-width: auto;">
 			<div class="card-header text-primary">

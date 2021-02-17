@@ -27,7 +27,18 @@
             </div>
             <div class="modal-body">
 				<p>${message}</p>
+				<c:set var="origin" value="${origin}"></c:set>
+				<c:choose>
+					<c:when test="${origin == 'delete'}">
+						<a href="viewApplication.jsp"><button type="button" class="btn btn-info">Home</button></a>
+					</c:when>
+					<c:when test="${origin == 'insufficientDays'}">
+						<a href="applicationForm.jsp"><button type="button" class="btn btn-info">Home</button></a>
+					</c:when>
+					<c:otherwise>
                     <a href="index.jsp"><button type="button" class="btn btn-info">Home</button></a>
+					</c:otherwise>
+				</c:choose>
             </div>
         </div>
     </div>
