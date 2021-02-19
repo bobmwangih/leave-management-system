@@ -54,33 +54,34 @@
 									<h5>Applicants Details:</h5>
 								</div>
 								<div class="card-body text-primary">
-									<div class="form-group">
-										<label for="firstName">Name: </label> 
-											<span>
-											<input type="text"
-											class="form-control" name="firstName"
-											value="${employee.firstName}"
-											readOnly="readonly">
-											 <input type="text"
-											class="form-control" name="lastName"
-											value="${employee.lastName}"
-											readOnly="readonly">
-										</span>
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label for="inputEmail4">First Name</label> <input
+												type="text" readonly class="form-control-plaintext"
+												name="firstName" value="${employee.firstName}">
+										</div>
+										<div class="form-group col-md-6">
+											<label for="inputPassword4">Last Name</label> <input
+												type="text" readonly class="form-control-plaintext"
+												name="firstName" value="${employee.lastName}">
+										</div>
 									</div>
+
 									<div class="form-group">
 										<label for="employeeId">Employee Id: </label> <input
-											type="text" class="form-control" name="employeeId"
-											value="${employee.employeeId}" readOnly="readonly">
+											type="text" readonly class="form-control-plaintext"
+											name="employeeId" value="${employee.employeeId}">
 									</div>
+
 									<div class="form-group">
 										<label for="email">Email: </label> <input type="email"
-											class="form-control" name="email" value="${employee.email}"
-											readOnly="readonly">
+											readonly class="form-control-plaintext" name="email"
+											value="${employee.email}">
 									</div>
 									<div class="form-group">
 										<label for="leaveBalance">Leave Balance</label> <input
-											type="text" class="form-control" name="leaveBalance"
-											value="${employee.leaveBalance}" readOnly="readonly">
+											type="text" readonly class="form-control-plaintext"
+											name="leaveBalance" value="${employee.leaveBalance}">
 									</div>
 								</div>
 						</div>

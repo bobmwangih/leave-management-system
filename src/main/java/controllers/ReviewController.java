@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,7 +38,7 @@ public class ReviewController {
 		String userName = request.getParameter("userName");
 		String password = request.getParameter("password");
 		String status = "pending";
-//if the Approver is authenticated,populate the jsp with:leaves pending approval & leaves that have been approved+their reviews(readOnly)
+//if the Approver is authenticated,populate the view with:leaves pending approval & leaves that have been approved+their reviews(readOnly)
 		if (userName.equals("patrick") && password.equals("patrick123")) {
 			List<Leave> leavesWithReviews = leaveDao.AllLeavesWithReview();
 			List<Leave> leaves = leaveDao.getAllPendingLeaves(status);
@@ -51,7 +50,7 @@ public class ReviewController {
 //invalid login credentials		
 		else {
 			mav.setViewName("leaveSaved.jsp");
-			mav.addObject("message", "Wrong Credentials,please Log in again with the correct Log in credentials!");
+			mav.addObject("message", "Wrong Credentials,Try again with valid credentials!");
 			return mav;
 		}
 	}

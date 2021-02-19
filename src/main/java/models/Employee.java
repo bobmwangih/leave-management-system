@@ -5,35 +5,26 @@ import java.util.List;
 public class Employee extends User {
 
 	private String email;
-	//private String jobTitle;
-	//private String station;
 	private String dateOfJoiningService;
 	private int leaveBalance;
-	//private String department;
 	private List<Leave> leaves;
 
 	public Employee(String employeeId) {
 		super(employeeId);
-		
+
 	}
-
-
 
 	public Employee() {
-	
+
 	}
 
-
-
-	public Employee(String employeeId, String firstName, String lastName,String email,String dateOfJoiningService, int leaveBalance) {
-		super(employeeId,firstName,lastName);
+	public Employee(String employeeId, String firstName, String lastName, String email, String dateOfJoiningService,
+			int leaveBalance) {
+		super(employeeId, firstName, lastName);
 		this.email = email;
 		this.dateOfJoiningService = dateOfJoiningService;
 		this.leaveBalance = leaveBalance;
 	}
-	
-
-
 
 	public Employee(String employeeId, String firstName, String lastName, String email, int leaveBalance) {
 		super(employeeId, firstName, lastName);
@@ -41,22 +32,10 @@ public class Employee extends User {
 		this.leaveBalance = leaveBalance;
 	}
 
-
-//
-//	public Employee(String email, int leaveBalance) {
-//		super();
-//		this.email = email;
-//		this.leaveBalance = leaveBalance;
-//	}
-
-
-
-	public Employee(String employeeId,int leaveBalance) {
+	public Employee(String employeeId, int leaveBalance) {
 		super(employeeId);
 		this.leaveBalance = leaveBalance;
 	}
-
-
 
 	public String getEmail() {
 		return email;
@@ -66,8 +45,6 @@ public class Employee extends User {
 		this.email = email;
 	}
 
-
-
 	public String getDateOfJoiningService() {
 		return dateOfJoiningService;
 	}
@@ -76,31 +53,21 @@ public class Employee extends User {
 		this.dateOfJoiningService = dateOfJoiningService;
 	}
 
-
-
 	public int getLeaveBalance() {
 		return leaveBalance;
 	}
-
-
 
 	public void setLeaveBalance(int leaveBalance) {
 		this.leaveBalance = leaveBalance;
 	}
 
-
-
 	public List<Leave> getLeaves() {
 		return leaves;
 	}
 
-
-
 	public void setLeaves(List<Leave> leaves) {
 		this.leaves = leaves;
 	}
-
-
 
 	@Override
 	public String toString() {
@@ -108,6 +75,4 @@ public class Employee extends User {
 				+ leaveBalance + ", leaves=" + leaves + "]";
 	}
 
-
-	
 }

@@ -16,15 +16,13 @@ public class Leave {
 	private Review review;
 	private Employee employee;
 	private Approver approver;
-	
+
 	public Leave() {
-		
+
 	}
 
-
-
-	public Leave(String employeeId, String leaveType, int daysRequested,String startDate,String endDate, String address, String dateOfApplication,
-			String status) {
+	public Leave(String employeeId, String leaveType, int daysRequested, String startDate, String endDate,
+			String address, String dateOfApplication, String status) {
 		super();
 		this.employeeId = employeeId;
 		this.leaveType = leaveType;
@@ -35,11 +33,9 @@ public class Leave {
 		this.dateOfApplication = dateOfApplication;
 		this.status = status;
 	}
-	
-	
 
-	public Leave(int leaveId, String employeeId, String leaveType, int daysRequested,String startDate,String endDate, String address,
-			String dateOfApplication, String status) {
+	public Leave(int leaveId, String employeeId, String leaveType, int daysRequested, String startDate, String endDate,
+			String address, String dateOfApplication, String status) {
 		super();
 		this.leaveId = leaveId;
 		this.employeeId = employeeId;
@@ -51,7 +47,6 @@ public class Leave {
 		this.dateOfApplication = dateOfApplication;
 		this.status = status;
 	}
-
 
 	public Leave(int leaveId, String employeeId, String leaveType, int daysRequested, String startDate, String endDate,
 			String address, String dateOfApplication, String status, String dateOfApproval, String approverId) {
@@ -69,9 +64,7 @@ public class Leave {
 		this.approverId = approverId;
 	}
 
-
-
-	public Leave(int leaveId, String status, String dateOfApproval,String approverId) {
+	public Leave(int leaveId, String status, String dateOfApproval, String approverId) {
 		super();
 		this.leaveId = leaveId;
 		this.status = status;
@@ -79,7 +72,6 @@ public class Leave {
 		this.approverId = approverId;
 	}
 
-	
 	public int getLeaveId() {
 		return leaveId;
 	}
@@ -143,80 +135,54 @@ public class Leave {
 	public void setDateOfApproval(String dateOfApproval) {
 		this.dateOfApproval = dateOfApproval;
 	}
-	
-	
+
 	public String getStartDate() {
 		return startDate;
 	}
-
-
 
 	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
 
-
-
 	public String getEndDate() {
 		return endDate;
 	}
-
-
 
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
 
-
-
 	public String getApproverId() {
 		return approverId;
 	}
-
-
 
 	public void setApproverId(String approverId) {
 		this.approverId = approverId;
 	}
 
-	
-
-
 	public Review getReview() {
 		return review;
 	}
-
-
 
 	public void setReview(Review review) {
 		this.review = review;
 	}
 
-
-
 	public Employee getEmployee() {
 		return employee;
 	}
-
-
 
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
 	}
 
-
-
 	public Approver getApprover() {
 		return approver;
 	}
 
-
-
 	public void setApprover(Approver approver) {
 		this.approver = approver;
 	}
-
-
 
 	@Override
 	public String toString() {
@@ -227,7 +193,4 @@ public class Leave {
 				+ ", employee=" + getEmployee() + ", approver=" + getApprover() + "]";
 	}
 
-	
-	
 }
-

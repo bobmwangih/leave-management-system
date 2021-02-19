@@ -7,13 +7,10 @@ public class Review {
 	public String reviewType;
 	public String remarks;
 	public String dateOfApproval;
-	
-	
-	
-	public Review() {
-		
-	}
 
+	public Review() {
+
+	}
 
 	public Review(int reviewId, int leaveId, String reviewType, String remarks, String dateOfApproval) {
 		this.reviewId = reviewId;
@@ -23,8 +20,6 @@ public class Review {
 		this.dateOfApproval = dateOfApproval;
 	}
 
-
-
 	public Review(int leaveId, String reviewType, String remarks, String dateOfApproval) {
 		super();
 		this.leaveId = leaveId;
@@ -32,14 +27,6 @@ public class Review {
 		this.remarks = remarks;
 		this.dateOfApproval = dateOfApproval;
 	}
-
-	/*
-	 * public Review(int reviewId, String reviewType, String remarks, String
-	 * dateOfApproval) { super(); this.reviewId = reviewId; this.reviewType =
-	 * reviewType; this.remarks = remarks; this.dateOfApproval = dateOfApproval; }
-	 */
-
-
 
 	public int getReviewId() {
 		return reviewId;
@@ -81,15 +68,10 @@ public class Review {
 		this.dateOfApproval = dateOfApproval;
 	}
 
-
-
 	@Override
 	public String toString() {
 		return "Review [reviewId=" + reviewId + ", leaveId=" + leaveId + ", reviewType=" + reviewType + ", remarks="
-				+ remarks + ", dateOfApproval=" + dateOfApproval +  "]";
+				+ remarks + ", dateOfApproval=" + dateOfApproval + "]";
 	}
 
-	
-	
-	
 }

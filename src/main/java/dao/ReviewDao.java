@@ -4,6 +4,7 @@ import models.Review;
 
 public interface ReviewDao {
 
+//saving a new Review	
 	public void saveReview(Review review);
-	public Review getReviewById(int reviewId);
+
 }

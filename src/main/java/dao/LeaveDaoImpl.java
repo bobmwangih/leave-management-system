@@ -11,7 +11,7 @@ import utils.MyBatisConfig;
 
 public class LeaveDaoImpl implements LeaveDao {
 	
-
+//saving a new leave
 	public void saveLeave(Leave leave) {
 		SqlSession session = MyBatisConfig.getSessionFactory().openSession();
 		session.insert("leaveMapper.insertLeave", leave);
@@ -19,6 +19,7 @@ public class LeaveDaoImpl implements LeaveDao {
 		session.close();
 	}
 
+//getting all leaves that haven't been approved		
 	public List<Leave> getAllPendingLeaves(String status) {
 		SqlSession session = MyBatisConfig.getSessionFactory().openSession();
 		List<Leave> leaves= session.selectList("leaveMapper.getAllPendingLeaves",status);
@@ -27,6 +28,7 @@ public class LeaveDaoImpl implements LeaveDao {
 		return leaves;
 	}
 
+//get one leave	by its id	
 	public Leave getLeaveById(int leaveId) {
 		SqlSession session = MyBatisConfig.getSessionFactory().openSession();
 		Leave leave = session.selectOne("leaveMapper.getLeaveById", leaveId);
@@ -35,25 +37,19 @@ public class LeaveDaoImpl implements LeaveDao {
 		return leave;
 	}
 	
+//getting all leaves that have not been reviewed for a given employee -for editing/deleting			
 	public List<Leave> getLeaveByEmployeeIdForEditing(String employeeId,String status) {
-		Map<String,String> details= new HashMap<String, String>();
-		details.put("employeeId", employeeId);
-		details.put("status", status);
+		Map<String,String> queryDetails= new HashMap<String, String>();
+		queryDetails.put("employeeId", employeeId);
+		queryDetails.put("status", status);
 		SqlSession session = MyBatisConfig.getSessionFactory().openSession();
-		List<Leave> leaves = session.selectList("leaveMapper.getLeaveByEmployeeId", details);
+		List<Leave> leaves = session.selectList("leaveMapper.getLeaveByEmployeeIdAndStatus", queryDetails);
 		session.commit();
 		session.close();
 		return leaves;
 	}
 
-	public void updateLeave(Leave leave) {
-		SqlSession session = MyBatisConfig.getSessionFactory().openSession();
-		session.update("leaveMapper.updateLeave", leave);
-		session.commit();
-		session.close();
-		
-	}
-
+//save an existing leave to the database	
 	public void updateEditedLeave(Leave leave) {
 		SqlSession session = MyBatisConfig.getSessionFactory().openSession();
 		session.update("leaveMapper.updateEditedLeave", leave);
@@ -63,6 +59,7 @@ public class LeaveDaoImpl implements LeaveDao {
 		
 	}
 
+//deletes a leave with status-pending	
 	public void delete(int leaveId) {
 		SqlSession session = MyBatisConfig.getSessionFactory().openSession();
 		session.delete("leaveMapper.delete", leaveId);
@@ -71,13 +68,25 @@ public class LeaveDaoImpl implements LeaveDao {
 		
 	}
 
+//getting all leaves that have a status-approved/rejected for a specific employee	
 	public List<Leave> getLeaveAndReview(String employeeId) {
 		SqlSession session = MyBatisConfig.getSessionFactory().openSession();
-		List<Leave> leaves = session.selectList("leaveMapper.leaveWithReview", employeeId);
+		List<Leave> leaves = session.selectList("leaveMapper.AllLeavesByEmployeeIdWithReview", employeeId);
 		session.commit();
 		session.close();
 		return leaves;
 	}
+	
+//getting one leave that has a status-approved/rejected--used to show the remarks
+	public Leave getLeaveByIdWithReview(int leaveId) {
+		SqlSession session = MyBatisConfig.getSessionFactory().openSession();
+		Leave leave = session.selectOne("leaveMapper.oneLeaveByLeaveIdWithReview", leaveId);
+		session.commit();
+		session.close();
+		return leave;
+	}
+
+//getting all leaves whose status:-approved/rejected with their reviews		
 	public List<Leave> AllLeavesWithReview() {
 		SqlSession session = MyBatisConfig.getSessionFactory().openSession();
 		List<Leave> leaves = session.selectList("leaveMapper.AllLeavesWithReview");
@@ -86,31 +95,14 @@ public class LeaveDaoImpl implements LeaveDao {
 		return leaves;
 	}
 
-	public Leave getLeaveByIdWithReview(int leaveId) {
+//update Leave after review has been inserted
+	public void updateLeave(Leave leave) {
 		SqlSession session = MyBatisConfig.getSessionFactory().openSession();
-		Leave leave = session.selectOne("leaveMapper.leaveByLeaveIdWithReview", leaveId);
+		session.update("leaveMapper.updateLeaveAfterReview", leave);
 		session.commit();
 		session.close();
-		return leave;
 	}
 
-	public List<Leave> leavezWithReview() {
-		SqlSession session = MyBatisConfig.getSessionFactory().openSession();
-		List<Leave> leaves = session.selectList("leaveMapper.leavezWithReview");
-		session.commit();
-		session.close();
-		return leaves;
-		
-	}
-
-	public Leave leaveWithReviewAndItsActors(int leaveId) {
-		SqlSession session = MyBatisConfig.getSessionFactory().openSession();
-		Leave leave = session.selectOne("leaveMapper.leaveWithReviewAndItsActors", leaveId);
-		session.commit();
-		session.close();
-		return leave;
-	}
-	
 	
 
 }

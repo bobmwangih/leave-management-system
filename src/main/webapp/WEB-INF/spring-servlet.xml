@@ -22,5 +22,5 @@
 	<bean id="employeeDao" class="dao.EmployeeDaoImpl"></bean>
 	<bean id="leaveDao" class="dao.LeaveDaoImpl"></bean>
 	<bean id="reviewDao" class="dao.ReviewDaoImpl"></bean>
-	<bean id="approverDao" class="dao.ApproverDaoImpl"></bean>
+	<bean id="reportsDao" class="dao.ReportsDaoImpl"></bean>
 </beans>

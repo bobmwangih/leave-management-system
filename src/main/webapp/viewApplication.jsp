@@ -100,7 +100,6 @@
 					style="max-width: auto;">
 					<thead>
 						<tr>
-						<th scope="col">leave Id</th>
 							<th scope="col">Employee Id</th>
 							<th scope="col">leave Type</th>
 							<th scope="col">Days Requested</th>
@@ -116,7 +115,6 @@
 							<c:set var="status" value="${leave.status}" />
 							<c:if test=""></c:if>
 							<tr>
-							<td><c:out value="${leaveWithReview.leaveId}" /></td>
 								<td><c:out value="${leaveWithReview.employeeId}" /></td>
 								<td><c:out value="${leaveWithReview.leaveType}" /></td>
 								<td><c:out value="${leaveWithReview.daysRequested}" /></td>

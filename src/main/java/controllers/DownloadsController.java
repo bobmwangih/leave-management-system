@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import dao.LeaveDao;
+import dao.ReportsDao;
 import models.Leave;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -31,7 +30,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 public class DownloadsController {
 
 	@Autowired
-	LeaveDao leaveDao;
+	ReportsDao reportsDao;
 	private Calendar calender=Calendar.getInstance();
 	
 //Downloading approved Leave application	
@@ -39,7 +38,7 @@ public class DownloadsController {
 	public void downloadApprovedLeavePdf(@RequestParam("leaveId") int leaveId,HttpServletRequest request, HttpServletResponse response) throws IOException, JRException {
 		System.out.println(leaveId);
 //getting the values to be included in the report from the database
-		Leave leave = leaveDao.leaveWithReviewAndItsActors(leaveId);
+		Leave leave = reportsDao.leaveWithReviewAndItsActors(leaveId);
 		System.out.println(leave);
 		
 //converting the result to a  List in order for it to be passed to the JR datasource

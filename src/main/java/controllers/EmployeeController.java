@@ -36,8 +36,8 @@ public class EmployeeController {
 		
 //Employee Id does not exist
 		else {
-			mav.setViewName("index.jsp");
-			mav.addObject("employeeId", employeeId);
+			mav.setViewName("leaveSaved.jsp");
+			mav.addObject("message", employeeId+" does not exist in our Systems");
 			return mav;
 		}
 			

@@ -37,6 +37,7 @@
 					<thead>
 						<tr>
 							<th scope="col">Employee Id</th>
+							<th scope="col">Name</th>
 							<th scope="col">leave Type</th>
 							<th scope="col">Days Requested</th>
 							<th scope="col">Intended leave start date</th>
@@ -48,8 +49,10 @@
 					</thead>
 					<tbody>
 						<c:forEach items="${leaves}" var="leave">
+						<c:set var="employee" value="${leave.employee}"></c:set>
 							<tr>
 								<td><c:out value="${leave.employeeId}" /></td>
+								<td><c:out value="${employee.firstName} ${employee.lastName}" /></td>
 								<td><c:out value="${leave.leaveType}" /></td>
 								<td><c:out value="${leave.daysRequested}" /></td>
 								<td><c:out value="${leave.startDate}" /></td>
@@ -82,6 +85,7 @@
 					<thead>
 						<tr>
 							<th scope="col">Employee Id</th>
+							<th scope="col">Name</th>
 							<th scope="col">leave Type</th>
 							<th scope="col">Days Requested</th>
 							<th scope="col">Intended leave start date</th>
@@ -94,8 +98,10 @@
 					</thead>
 					<tbody>
 						<c:forEach items="${leavesWithReviews}" var="leaveWithRevs">
+						<c:set var="employee" value="${leaveWithRevs.employee}"></c:set>
 							<tr>
 								<td><c:out value="${leaveWithRevs.employeeId}" /></td>
+								<td><c:out value="${employee.firstName} ${employee.lastName}" /></td>
 								<td><c:out value="${leaveWithRevs.leaveType}" /></td>
 								<td><c:out value="${leaveWithRevs.daysRequested}" /></td>
 								<td><c:out value="${leaveWithRevs.startDate}" /></td>

@@ -32,7 +32,7 @@
 
 						<div class="col-md-2">
 							<button type="submit" class="btn btn-outline-danger btn-sm "
-								data-target="#loginAdminModal" data-toggle="modal">Administrator</button>
+								data-target="#loginAdminModal" data-toggle="modal">HR</button>
 
 							<div class="modal fade border-success" tabindex="-1"
 								id="loginAdminModal">
@@ -46,11 +46,11 @@
 												<form action="#" method="post">
 													<div class="form-group">
 														<label for="userName">UserName: </label> <input
-															type="text" class="form-control" name="userName" value="">
+															type="text" class="form-control" name="userName" >
 													</div>
 													<div class="form-group">
 														<label for="password">Password: </label> <input
-															type="text" class="form-control" name="password" value="">
+															type="password" class="form-control" name="password" >
 													</div>
 													<button type="submit" class="btn btn-outline-success">Log
 														in</button>
@@ -85,12 +85,12 @@
 													<div class="form-group">
 														<label for="userName">UserName: </label> <input
 															type="text" class="form-control" name="userName"
-															value="patrick">
+															>
 													</div>
 													<div class="form-group">
 														<label for="password">Password: </label> <input
-															type="text" class="form-control" name="password"
-															value="patrick123">
+															type="password" class="form-control" name="password"
+															>
 													</div>
 													<button type="submit" class="btn btn-outline-success">Log
 														in</button>
@@ -126,7 +126,7 @@
 												<div class="form-group">
 													<div>
 														<input type="text" class="form-control" name="employeeId"
-															placeholder="Employee Id" value="t33265896">
+															placeholder="Employee Id">
 														<button type="submit" class="btn btn-outline-success">Check</button>
 													</div>
 
@@ -158,7 +158,7 @@
 						<div class="form-group">
 							<div>
 								<input type="text" class="form-control" name="employeeId"
-									placeholder="Employee Id" value="t33265896">
+									placeholder="Employee Id">
 								<button type="submit" class="btn btn-outline-success">Apply</button>
 							</div>
 

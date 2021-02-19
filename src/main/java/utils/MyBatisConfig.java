@@ -16,10 +16,10 @@ public class MyBatisConfig {
 		Reader reader;
 
 		try {
+//reading the Sql configuration from the xml
 			reader = Resources.getResourceAsReader("myBatisResources/myBatisConfig.xml");
 			sessionFactory = new SqlSessionFactoryBuilder().build(reader);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
