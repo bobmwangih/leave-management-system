@@ -34,131 +34,149 @@
 </head>
 <body>
 	<div class="container">
-		<a href="index.jsp"><button type="button" class="btn btn-info">Back</button></a>
-		<br> <br>
-		<div class="card text-center border-danger" style="max-width: auto;">
-			<div class="card-header text-primary">
-				<h5>Leave Pending Approval</h5>
+		<div class="card">
+			<div class="card-header text-primary text-center">
+				<h5>Leave Management System</h5>
 			</div>
-			<div class="card-body text-success">
-				<table class="table table-striped table-bordered table-hover"
-					style="max-width: auto;">
-					<thead>
-						<tr>
-							<th scope="col">Employee Id</th>
-							<th scope="col">leave Type</th>
-							<th scope="col">Days Requested</th>
-							<th scope="col">Intended Start Date</th>
-							<th scope="col">Intended end Date</th>
-							<th scope="col">Date of application</th>
-							<th scope="col">Date of approval</th>
-							<th scope="col">Leave status</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${leaves}" var="leave">
-							<c:set var="status" value="${leave.status}" />
-							<c:if test=""></c:if>
-							<tr>
-								<td><c:out value="${leave.employeeId}" /></td>
-								<td><c:out value="${leave.leaveType}" /></td>
-								<td><c:out value="${leave.daysRequested}" /></td>
-								<td><c:out value="${leave.startDate}" /></td>
-								<td><c:out value="${leave.endDate}" /></td>
-								<td><c:out value="${leave.dateOfApplication}" /></td>
-								<td><c:out value="${leave.dateOfApproval}" /></td>
-								<td><c:out value="${leave.status}" /></td>
+			<div class="card-body">
+				<div class="text-left">
+					<a href="index.jsp"><button type="button" class="btn btn-info">Back</button></a>
+				</div>
+				<br> <br>
+				<div class="card text-center border-danger" style="max-width: auto;">
+					<div class="card-header text-primary">
+						<h5>Leave Pending Approval</h5>
+					</div>
+					<div class="card-body text-success">
+						<table class="table table-striped table-bordered table-hover"
+							style="max-width: auto;">
+							<thead>
+								<tr>
+									<th scope="col">Employee Id</th>
+									<th scope="col">leave Type</th>
+									<th scope="col">Days Requested</th>
+									<th scope="col">Intended Start Date</th>
+									<th scope="col">Intended end Date</th>
+									<th scope="col">Date of application</th>
+									<th scope="col">Date of approval</th>
+									<th scope="col">Leave status</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:set var="theLeavesPendingApproval" value="${leaves}"></c:set>
+								<c:if test="${theLeavesPendingApproval.isEmpty()}">
+									<tr>
+										<td><a href="#"><button
+													class="btn btn-sm btn-danger" type="button" disabled>No pending leaves exists at the moment</button></a></td>
+									</tr>
+								</c:if>
+								<c:forEach items="${leaves}" var="leave">
+									<c:set var="status" value="${leave.status}" />
+									<tr>
+										<td><c:out value="${leave.employeeId}" /></td>
+										<td><c:out value="${leave.leaveType}" /></td>
+										<td><c:out value="${leave.daysRequested}" /></td>
+										<td><c:out value="${leave.startDate}" /></td>
+										<td><c:out value="${leave.endDate}" /></td>
+										<td><c:out value="${leave.dateOfApplication}" /></td>
+										<td><c:out value="${leave.dateOfApproval}" /></td>
+										<td><c:out value="${leave.status}" /></td>
 
-								<td><a
-									href="edit?leaveId=${leave.leaveId}&employeeId=${leave.employeeId}"
-									data-toggle="tooltip" title="Edit your application">Edit</a>&nbsp;
+										<td><a
+											href="edit?leaveId=${leave.leaveId}&employeeId=${leave.employeeId}"
+											data-toggle="tooltip" title="Edit your application">Edit</a>&nbsp;
 
-									<c:url var="deleteLink" value="/delete">
-										<c:param name="leaveId" value="${leave.leaveId}"></c:param>
-									</c:url> <a href="${deleteLink}" data-toggle="tooltip"
-									title="Remove your application"><button
-											class="btn btn-outline-danger btn-sm " type="button"
-											onclick="if(!(confirm('Your Leave application will be deleted,Continue?')))return false;">Delete</button></a>
-								</td>
-
-
-
-							</tr>
-						</c:forEach>
-
-					</tbody>
-				</table>
-			</div>
-		</div>
-		<br> <br>
-		<div class="card text-center border-success" style="max-width: auto;">
-			<div class="card-header text-primary">
-				<h5>Approved/Rejected Leaves</h5>
-			</div>
-			<div class="card-body text-success">
-				<table class="table table-striped table-bordered"
-					style="max-width: auto;">
-					<thead>
-						<tr>
-							<th scope="col">Employee Id</th>
-							<th scope="col">leave Type</th>
-							<th scope="col">Days Requested</th>
-							<th scope="col">Intended Start Date</th>
-							<th scope="col">Intended end Date</th>
-							<th scope="col">Date of application</th>
-							<th scope="col">Date of approval</th>
-							<th scope="col">Leave status</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${leavesWithReview}" var="leaveWithReview">
-							<c:set var="status" value="${leave.status}" />
-							<c:if test=""></c:if>
-							<tr>
-								<td><c:out value="${leaveWithReview.employeeId}" /></td>
-								<td><c:out value="${leaveWithReview.leaveType}" /></td>
-								<td><c:out value="${leaveWithReview.daysRequested}" /></td>
-								<td><c:out value="${leaveWithReview.startDate}" /></td>
-								<td><c:out value="${leaveWithReview.endDate}" /></td>
-								<td><c:out value="${leaveWithReview.dateOfApplication}" /></td>
-								<td><c:out value="${leaveWithReview.dateOfApproval}" /></td>
-								<td><c:out value="${leaveWithReview.status}" /></td>
-								<c:set var="Status" value="${leaveWithReview.status}"></c:set>
-								<c:choose>
-									<c:when test="${Status=='approved'}">
-										<td>
-										<c:url var="downloadLink" value="/download">
-										<c:param name="leaveId" value="${leaveWithReview.leaveId}"></c:param>
-									</c:url>
-										<a
-										href="${downloadLink}"
-											data-toggle="tooltip"
-											title="Download a pdf version of your approved leave!"><button
-													class="btn btn-outline-success" type="button">Download</button></a></td>
-									</c:when>
-
-									<c:otherwise>
-										<td>
-										<div class="col-md-2">
-												<a href="seeRemarks?leaveId=${leaveWithReview.leaveId}"
-													data-toggle="tooltip"
-													title="View Approver's remarks of your approved leave!"><button
-														class="btn btn-outline-warning" type="button">Closed(see
-														Remarks)</button></a>
-														</div>
+											<c:url var="deleteLink" value="/delete">
+												<c:param name="leaveId" value="${leave.leaveId}"></c:param>
+											</c:url> <a href="${deleteLink}" data-toggle="tooltip"
+											title="Remove your application"><button
+													class="btn btn-outline-danger btn-sm " type="button"
+													onclick="if(!(confirm('Your Leave application will be deleted,Continue?')))return false;">Delete</button></a>
 										</td>
-									</c:otherwise>
 
-								</c:choose>
 
-							</tr>
-						</c:forEach>
 
-					</tbody>
-				</table>
+									</tr>
+								</c:forEach>
+
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<br> <br>
+				<div class="card text-center border-success"
+					style="max-width: auto;">
+					<div class="card-header text-primary">
+						<h5>Approved/Rejected Leaves</h5>
+					</div>
+					<div class="card-body text-success">
+						<table class="table table-striped table-bordered"
+							style="max-width: auto;">
+							<thead>
+								<tr>
+									<th scope="col">Employee Id</th>
+									<th scope="col">leave Type</th>
+									<th scope="col">Days Requested</th>
+									<th scope="col">Intended Start Date</th>
+									<th scope="col">Intended end Date</th>
+									<th scope="col">Date of application</th>
+									<th scope="col">Date of approval</th>
+									<th scope="col">Leave status</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:set var="theLeavesWithReview" value="${leavesWithReview}"></c:set>
+								<c:if test="${theLeavesWithReview.isEmpty()}">
+									<tr>
+										<td><a href="#"><button
+													class="btn btn-sm btn-danger" type="button" disabled>No reviewed leaves exists at the moment</button></a></td>
+									</tr>
+								</c:if>
+								<c:forEach items="${leavesWithReview}" var="leaveWithReview">
+									<c:set var="status" value="${leave.status}" />
+									<c:if test=""></c:if>
+									<tr>
+										<td><c:out value="${leaveWithReview.employeeId}" /></td>
+										<td><c:out value="${leaveWithReview.leaveType}" /></td>
+										<td><c:out value="${leaveWithReview.daysRequested}" /></td>
+										<td><c:out value="${leaveWithReview.startDate}" /></td>
+										<td><c:out value="${leaveWithReview.endDate}" /></td>
+										<td><c:out value="${leaveWithReview.dateOfApplication}" /></td>
+										<td><c:out value="${leaveWithReview.dateOfApproval}" /></td>
+										<td><c:out value="${leaveWithReview.status}" /></td>
+										<c:set var="Status" value="${leaveWithReview.status}"></c:set>
+										<c:choose>
+											<c:when test="${Status=='approved'}">
+												<td><c:url var="downloadLink" value="/download">
+														<c:param name="leaveId" value="${leaveWithReview.leaveId}"></c:param>
+													</c:url> <a href="${downloadLink}" data-toggle="tooltip"
+													title="Download a pdf version of your approved leave!"><button
+															class="btn btn-outline-success" type="button">Download</button></a></td>
+											</c:when>
+
+											<c:otherwise>
+												<td>
+													<div class="col-md-2">
+														<a href="seeRemarks?leaveId=${leaveWithReview.leaveId}"
+															data-toggle="tooltip"
+															title="View Approver's remarks of your approved leave!"><button
+																class="btn btn-outline-warning" type="button">Closed(see
+																Remarks)</button></a>
+													</div>
+												</td>
+											</c:otherwise>
+
+										</c:choose>
+
+									</tr>
+								</c:forEach>
+
+							</tbody>
+						</table>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
 	</div>
 </body>
 </html>

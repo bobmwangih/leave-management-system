@@ -39,147 +39,155 @@
 </head>
 <body>
 	<div class="container">
-		<a href="index.jsp"><button type="button" class="btn btn-info">Home</button></a>
-		<br> <br>
-		<div class="card" style="max-width: auto;">
-			<div class="card-header text-primary">
-				<h5>Leave Application Form</h5>
+		<div class="card">
+			<div class="card-header text-primary text-center">
+				<div class="text-left">
+					<a href="index.jsp"><button type="button" class="btn btn-info">Back</button></a>
+				</div>
+				<h5>Leave Management System</h5>
 			</div>
 			<div class="card-body">
-				<div class="row">
-					<div class="col-sm-6">
-						<div class="card border-success mb-3" style="max-width: auto;">
-							<form action="apply" method="post">
-								<div class="card-header">
-									<h5>Applicants Details:</h5>
-								</div>
-								<div class="card-body text-primary">
-									<div class="form-row">
-										<div class="form-group col-md-6">
-											<label for="inputEmail4">First Name</label> <input
-												type="text" readonly class="form-control-plaintext"
-												name="firstName" value="${employee.firstName}">
-										</div>
-										<div class="form-group col-md-6">
-											<label for="inputPassword4">Last Name</label> <input
-												type="text" readonly class="form-control-plaintext"
-												name="firstName" value="${employee.lastName}">
-										</div>
-									</div>
-
-									<div class="form-group">
-										<label for="employeeId">Employee Id: </label> <input
-											type="text" readonly class="form-control-plaintext"
-											name="employeeId" value="${employee.employeeId}">
-									</div>
-
-									<div class="form-group">
-										<label for="email">Email: </label> <input type="email"
-											readonly class="form-control-plaintext" name="email"
-											value="${employee.email}">
-									</div>
-									<div class="form-group">
-										<label for="leaveBalance">Leave Balance</label> <input
-											type="text" readonly class="form-control-plaintext"
-											name="leaveBalance" value="${employee.leaveBalance}">
-									</div>
-								</div>
-						</div>
+				<div class="card" style="max-width: auto;">
+					<div class="card-header text-primary">
+						<h5>Leave Application Form</h5>
 					</div>
-					<br> <br>
-					<div class="col-sm-6">
-						<div class="card border-success mb-3" style="max-width: auto;">
-							<div class="card-header">
-								<h5>Fill the fields below:</h5>
-							</div>
-							<br> <input type="hidden" name="leaveId"
-								value=${leave.leaveId} >
-							<div class="card-body text-primary">
-								<div class="form-group">
-									<select class="custom-select" id="leaveType" name="leaveType">
-										<c:set var="typeOfLeave" value="${leave.leaveType}" />
-										<c:choose>
-											<c:when test="${typeOfLeave == 'Annual'}">
-												<option>Choose a leave Type...</option>
-												<option value="Annual" selected>Annual</option>
-												<option value="Emergency">Emergency</option>
-												<option value="sick">Sick</option>
-											</c:when>
+					<div class="card-body">
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="card border-success mb-3" style="max-width: auto;">
+									<form action="apply" method="post">
+										<div class="card-header">
+											<h5>Applicants Details:</h5>
+										</div>
+										<div class="card-body text-primary">
+											<div class="form-row">
+												<div class="form-group col-md-6">
+													<label for="inputEmail4">First Name</label> <input
+														type="text" readonly class="form-control-plaintext"
+														name="firstName" value="${employee.firstName}">
+												</div>
+												<div class="form-group col-md-6">
+													<label for="inputPassword4">Last Name</label> <input
+														type="text" readonly class="form-control-plaintext"
+														name="firstName" value="${employee.lastName}">
+												</div>
+											</div>
 
-											<c:when test="${typeOfLeave == 'Emergency'}">
-												<option>Choose a leave Type...</option>
-												<option value="Annual">Annual</option>
-												<option value="Emergency" selected>Emergency</option>
-												<option value="sick">Sick</option>
-											</c:when>
+											<div class="form-group">
+												<label for="employeeId">Employee Id: </label> <input
+													type="text" readonly class="form-control-plaintext"
+													name="employeeId" value="${employee.employeeId}">
+											</div>
 
-											<c:when test="${typeOfLeave == 'sick'}">
-												<option>Choose a leave Type...</option>
-												<option value="Annual">Annual</option>
-												<option value="Emergency">Emergency</option>
-												<option value="sick" selected>Sick</option>
-											</c:when>
-
-											<c:otherwise>
-												<option selected>Choose a leave Type...</option>
-												<option value="Annual">Annual</option>
-												<option value="Emergency">Emergency</option>
-												<option value="sick">Sick</option>
-											</c:otherwise>
-										</c:choose>
-
-									</select>
-								</div>
-								<div id="dialog" title="Insufficient Days" style="display: none">
-									<h6>
-										The number of days Requested should be less than <strong>${employee.leaveBalance +1}</strong>
-									</h6>
-								</div>
-								<div class="form-group">
-									<label for="daysRequested">No of Days: </label> <input
-										type="text" class="form-control" id="daysReqsted"
-										name="daysRequested" value="${leave.daysRequested}"
-										title="Leave Balance" data-toggle="popover"
-										data-placement="top" data-trigger="focus"
-										data-content="Requested days should be less than ${employee.leaveBalance +1} . Unless its a sick leave!"
-										" onkeyup="myFunction()">
-
-								</div>
-								<div class="form-group">
-									<label for="startDate">When to start the leave: </label> <input
-										type="date" class="form-control" name="startDate"
-										value="${leave.startDate}">
-								</div>
-								<div class="form-group">
-									<label for="endDate">When to end the leave: </label> <input
-										type="date" class="form-control" name="endDate"
-										value="${leave.endDate}" title="" data-toggle="popover"
-										data-placement="top" data-trigger="focus"
-										data-content="This date should add up to the amount of days Requested!"">
-								</div>
-								<div class="form-group">
-									<label for="address">Address while on leave: </label>
-									<textarea type="text" class="form-control" name="address">${leave.address}</textarea>
+											<div class="form-group">
+												<label for="email">Email: </label> <input type="email"
+													readonly class="form-control-plaintext" name="email"
+													value="${employee.email}">
+											</div>
+											<div class="form-group">
+												<label for="leaveBalance">Leave Balance</label> <input
+													type="text" readonly class="form-control-plaintext"
+													name="leaveBalance" value="${employee.leaveBalance}">
+											</div>
+										</div>
 								</div>
 							</div>
+							<br> <br>
+							<div class="col-sm-6">
+								<div class="card border-success mb-3" style="max-width: auto;">
+									<div class="card-header">
+										<h5>Fill the fields below:</h5>
+									</div>
+									<br> <input type="hidden" name="leaveId"
+										value=${leave.leaveId} >
+									<div class="card-body text-primary">
+										<div class="form-group">
+											<select class="custom-select" id="leaveType" name="leaveType">
+												<c:set var="typeOfLeave" value="${leave.leaveType}" />
+												<c:choose>
+													<c:when test="${typeOfLeave == 'Annual'}">
+														<option>Choose a leave Type...</option>
+														<option value="Annual" selected>Annual</option>
+														<option value="Emergency">Emergency</option>
+														<option value="sick">Sick</option>
+													</c:when>
+
+													<c:when test="${typeOfLeave == 'Emergency'}">
+														<option>Choose a leave Type...</option>
+														<option value="Annual">Annual</option>
+														<option value="Emergency" selected>Emergency</option>
+														<option value="sick">Sick</option>
+													</c:when>
+
+													<c:when test="${typeOfLeave == 'sick'}">
+														<option>Choose a leave Type...</option>
+														<option value="Annual">Annual</option>
+														<option value="Emergency">Emergency</option>
+														<option value="sick" selected>Sick</option>
+													</c:when>
+
+													<c:otherwise>
+														<option selected>Choose a leave Type...</option>
+														<option value="Annual">Annual</option>
+														<option value="Emergency">Emergency</option>
+														<option value="sick">Sick</option>
+													</c:otherwise>
+												</c:choose>
+
+											</select>
+										</div>
+										<div id="dialog" title="Insufficient Days"
+											style="display: none">
+											<h6>
+												The number of days Requested should be less than <strong>${employee.leaveBalance +1}</strong>
+											</h6>
+										</div>
+										<div class="form-group">
+											<label for="daysRequested">No of Days: </label> <input
+												type="text" class="form-control" id="daysReqsted"
+												name="daysRequested" value="${leave.daysRequested}"
+												title="Leave Balance" data-toggle="popover"
+												data-placement="top" data-trigger="focus"
+												data-content="Requested days should be less than ${employee.leaveBalance +1} . Unless its a sick leave!"
+												" onkeyup="myFunction()">
+
+										</div>
+										<div class="form-group">
+											<label for="startDate">When to start the leave: </label> <input
+												type="date" class="form-control" name="startDate"
+												value="${leave.startDate}">
+										</div>
+										<div class="form-group">
+											<label for="endDate">When to end the leave: </label> <input
+												type="date" class="form-control" name="endDate"
+												value="${leave.endDate}" title="" data-toggle="popover"
+												data-placement="top" data-trigger="focus"
+												data-content="This date should add up to the amount of days Requested!"">
+										</div>
+										<div class="form-group">
+											<label for="address">Address while on leave: </label>
+											<textarea type="text" class="form-control" name="address">${leave.address}</textarea>
+										</div>
+									</div>
+								</div>
+								<button type="submit" class="btn btn-outline-success">Apply</button>
+
+								</form>
+							</div>
+
 						</div>
-						<button type="submit" class="btn btn-outline-success">Apply</button>
-
-						</form>
 					</div>
-
 				</div>
 			</div>
 		</div>
-	</div>
 
-	<script>
+		<script>
 		$(document).ready(function() {
 			$('[data-toggle="popover"]').popover();
 		});
 	</script>
 
-	<script>
+		<script>
 	function myFunction(){
 		  var x = document.getElementById("daysReqsted").value;
 		  var y = document.getElementById("leaveType").value;

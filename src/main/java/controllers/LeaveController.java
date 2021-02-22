@@ -144,7 +144,6 @@ public class LeaveController {
 		leaveDao.delete(leaveId);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("leaveSaved.jsp");
-		mav.addObject("origin","delete");
 		mav.addObject("message", "leave deleted successfully!");
 		return mav;
 	}
