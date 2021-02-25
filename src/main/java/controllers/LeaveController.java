@@ -50,7 +50,6 @@ public class LeaveController {
 		
 		session.setAttribute("employee", employee);
 		ModelAndView mav = new ModelAndView();
-
 //saving a new leave entry
 
 		if (request.getParameter("leaveId").isEmpty()) {

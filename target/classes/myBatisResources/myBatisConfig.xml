@@ -9,6 +9,7 @@
 		<typeAlias type="models.Leave" alias="leave" />
 		<typeAlias type="models.Review" alias="review" />
 		<typeAlias type="models.Approver" alias="approver" />
+		<typeAlias type="models.TestUser" alias="testUser" />
 	</typeAliases>
 	<environments default="development">
 		<environment id="development">
@@ -27,5 +28,6 @@
 		<mapper resource="myBatisResources/leaveMapper.xml" />
 		<mapper resource="myBatisResources/reviewMapper.xml" />
 		<mapper resource="myBatisResources/approverMapper.xml" />
+		<mapper resource="myBatisResources/testUserMapper.xml" />
 	</mappers>
 </configuration>

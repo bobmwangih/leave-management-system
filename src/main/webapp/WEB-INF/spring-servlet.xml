@@ -23,4 +23,5 @@
 	<bean id="leaveDao" class="dao.LeaveDaoImpl"></bean>
 	<bean id="reviewDao" class="dao.ReviewDaoImpl"></bean>
 	<bean id="reportsDao" class="dao.ReportsDaoImpl"></bean>
+	<bean id="testUserDao" class="dao.TestUserDaoImpl"></bean>
 </beans>

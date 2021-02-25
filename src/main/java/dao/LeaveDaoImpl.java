@@ -8,8 +8,10 @@ import org.apache.ibatis.session.SqlSession;
 
 import models.Leave;
 import utils.MyBatisConfig;
+ 
 
-public class LeaveDaoImpl implements LeaveDao {
+public class LeaveDaoImpl implements LeaveDao{
+	
 	
 //saving a new leave
 	public void saveLeave(Leave leave) {
@@ -19,7 +21,7 @@ public class LeaveDaoImpl implements LeaveDao {
 		session.close();
 	}
 
-//getting all leaves that haven't been approved		
+//getting all leaves that haven't been approved
 	public List<Leave> getAllPendingLeaves(String status) {
 		SqlSession session = MyBatisConfig.getSessionFactory().openSession();
 		List<Leave> leaves= session.selectList("leaveMapper.getAllPendingLeaves",status);
@@ -28,7 +30,7 @@ public class LeaveDaoImpl implements LeaveDao {
 		return leaves;
 	}
 
-//get one leave	by its id	
+//get one leave	by its id
 	public Leave getLeaveById(int leaveId) {
 		SqlSession session = MyBatisConfig.getSessionFactory().openSession();
 		Leave leave = session.selectOne("leaveMapper.getLeaveById", leaveId);
@@ -37,7 +39,7 @@ public class LeaveDaoImpl implements LeaveDao {
 		return leave;
 	}
 	
-//getting all leaves that have not been reviewed for a given employee -for editing/deleting			
+//getting all leaves that have not been reviewed for a given employee -for editing/deleting
 	public List<Leave> getLeaveByEmployeeIdForEditing(String employeeId,String status) {
 		Map<String,String> queryDetails= new HashMap<String, String>();
 		queryDetails.put("employeeId", employeeId);
@@ -49,7 +51,7 @@ public class LeaveDaoImpl implements LeaveDao {
 		return leaves;
 	}
 
-//save an existing leave to the database	
+//save an existing leave to the database
 	public void updateEditedLeave(Leave leave) {
 		SqlSession session = MyBatisConfig.getSessionFactory().openSession();
 		session.update("leaveMapper.updateEditedLeave", leave);
@@ -59,7 +61,7 @@ public class LeaveDaoImpl implements LeaveDao {
 		
 	}
 
-//deletes a leave with status-pending	
+//deletes a leave with status-pending
 	public void delete(int leaveId) {
 		SqlSession session = MyBatisConfig.getSessionFactory().openSession();
 		session.delete("leaveMapper.delete", leaveId);
@@ -68,7 +70,7 @@ public class LeaveDaoImpl implements LeaveDao {
 		
 	}
 
-//getting all leaves that have a status-approved/rejected for a specific employee	
+//getting all leaves that have a status-approved/rejected for a specific employee
 	public List<Leave> getLeaveAndReview(String employeeId) {
 		SqlSession session = MyBatisConfig.getSessionFactory().openSession();
 		List<Leave> leaves = session.selectList("leaveMapper.AllLeavesByEmployeeIdWithReview", employeeId);
@@ -86,7 +88,7 @@ public class LeaveDaoImpl implements LeaveDao {
 		return leave;
 	}
 
-//getting all leaves whose status:-approved/rejected with their reviews		
+//getting all leaves whose status:-approved/rejected with their reviews	
 	public List<Leave> AllLeavesWithReview() {
 		SqlSession session = MyBatisConfig.getSessionFactory().openSession();
 		List<Leave> leaves = session.selectList("leaveMapper.AllLeavesWithReview");
