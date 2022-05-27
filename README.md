@@ -16,11 +16,11 @@
 
 ## Technology Stack 🛠
 
-| [SpringMVC ]
-| [JSP ]
-| [MyBatis]
-| [MySQL]
-| [JasperReports]
+| SpringMVC 
+| JSP 
+| MyBatis
+| MySQL
+| JasperReports
 <br />
 <br />
 
