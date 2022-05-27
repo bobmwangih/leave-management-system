@@ -1,31 +1,14 @@
-<!-- PROJECT LOGO -->
-<br />
-<p align="center">
-  <h1 align="center">Leave Management System ✨</h1>
-
-  <p align="center">
-    This is a web App to automate Leave managment processes for a corporate world setup. Gathered user requirements from members of staff at Kenya Revenue Authority and converted those into a full blown Spring application.
-    <br />
-    <br />
-  </p>
-</p>
-
-
-<br />
-<br />
+# leave-management-system
+This is a web App to automate Leave managment processes for a corporate world setup. Gathered user requirements from members of staff at Kenya Revenue Authority and converted those into a full blown Spring application.
 
 ## Technology Stack 🛠
 
-| SpringMVC 
-| JSP 
-| MyBatis
-| MySQL
-| JasperReports
-<br />
-<br />
+| [SpringMVC ]
+| [JSP ]
+| [MyBatis]
+| [MySQL]
+| [JasperReports]
 
-<p align="center">
-  
 ## Requirements
 
 1. Java - 1.8 +
@@ -58,5 +41,3 @@
 **5. Build and run the app on a tomcat server**
 
 ## Cheers!
-
-</p>
