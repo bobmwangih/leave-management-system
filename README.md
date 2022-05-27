@@ -25,8 +25,7 @@
 <br />
 
 <p align="center">
-# leave-management-system
-This repository host a full blown Leave-Management-System running on Spring framework, using the spring MVC pattern, myBatis as the ORM, Mysql database, Jsp for rendering and Jasper-reports for extracting and downloading pdf reports.
+  
 ## Requirements
 
 1. Java - 1.8 +
