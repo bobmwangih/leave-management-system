@@ -3,11 +3,11 @@ This is a web App to automate Leave managment processes for a corporate world se
 
 ## Technology Stack 🛠
 
-| [SpringMVC ]
-| [JSP ]
-| [MyBatis]
-| [MySQL]
-| [JasperReports]
+| SpringMVC 
+| JSP 
+| MyBatis
+| MySQL
+| JasperReports
 
 ## Requirements
 
