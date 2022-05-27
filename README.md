@@ -1,3 +1,30 @@
+<!-- PROJECT LOGO -->
+<br />
+<p align="center">
+  <h1 align="center">Leave Management System ✨</h1>
+
+  <p align="center">
+    This is a web App to automate Leave managment processes for a corporate world setup. Gathered user requirements from members of staff at Kenya Revenue Authority and converted those into a full blown Spring application.
+    <br />
+    <br />
+  </p>
+</p>
+
+
+<br />
+<br />
+
+## Technology Stack 🛠
+
+| [SpringMVC ]
+| [JSP ]
+| [MyBatis]
+| [MySQL]
+| [JasperReports]
+<br />
+<br />
+
+<p align="center">
 # leave-management-system
 This repository host a full blown Leave-Management-System running on Spring framework, using the spring MVC pattern, myBatis as the ORM, Mysql database, Jsp for rendering and Jasper-reports for extracting and downloading pdf reports.
 ## Requirements
@@ -32,3 +59,5 @@ This repository host a full blown Leave-Management-System running on Spring fram
 **5. Build and run the app on a tomcat server**
 
 ## Cheers!
+
+</p>
